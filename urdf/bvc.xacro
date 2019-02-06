@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="mintaur">
+
+    <xacro:include filename="/home/eichmeierbr/mrob/src/miniProject/urdf/experiment/materials.xacro" />
+	<xacro:include filename="/home/eichmeierbr/mrob/src/miniProject/urdf/experiment/properties.xacro" />
+    <xacro:include filename="/home/eichmeierbr/mrob/src/miniProject/urdf/experiment/links.xacro" />
+
+
+  <xacro:base_link/>
+  
+  <xacro:wheel side="right" fob="front" sideDim="${rightWheelDist}" fobDim="${frontWheelDist}" />
+  <xacro:wheel side="left" fob="front" sideDim="${leftWheelDist}" fobDim="${frontWheelDist}" />
+  <xacro:wheel side="right" fob="back" sideDim="${rightWheelDist}" fobDim="${backWheelDist}" />
+  <xacro:wheel side="left" fob="back" sideDim="${leftWheelDist}" fobDim="${backWheelDist}" />
+
+  <!-- <xacro:imu /> -->
+
+
+    <xacro:include filename="/home/eichmeierbr/mrob/src/miniProject/urdf/experiment/gazebo.xacro" />
+
+
+</robot>

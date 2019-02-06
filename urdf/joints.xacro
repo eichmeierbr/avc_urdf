@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="mintaur">
+
+
+	<xacro:macro name="axle_joint" params="side fob sideDim fobDim">
+        <joint name="base_to_${side}_${fob}_axle" type="revolute">
+            <axis xyz="0 0 1"/>
+            <limit effort="${axleEffort}" lower="${llimit}" upper="${ulimit}" velocity="${axleVelocity}"/>
+            <parent link="base_link"/>
+            <child link="${side}_${fob}_axle"/>
+            <origin xyz="${fobDim} ${sideDim} ${wheelDrop}" />
+        </joint>
+	</xacro:macro>
+
+
+	<xacro:macro name="rear_wheel_joint" params="side fob sideDim fobDim">
+        <joint name="${side}_${fob}_wheel_joint" type="continuous">
+            <axis xyz="0 1 0"/>
+            <parent link="base_link"/>
+            <child link="${side}_${fob}_wheel"/>
+            <origin xyz="${fobDim} ${sideDim} ${wheelDrop}" />
+        </joint>
+	</xacro:macro>
+
+
+
+    <xacro:macro name="front_wheel_joint" params="side fob sideDim fobDim">
+        <joint name="${side}_${fob}_wheel_joint" type="continuous">
+            <axis xyz="0 1 0"/>
+            <parent link="${side}_${fob}_axle"/>
+            <child link="${side}_${fob}_wheel"/>
+            <origin xyz="0 0 0" />
+        </joint>
+	</xacro:macro>
+
+    <!-- <xacro:macro name="imu_joint">
+        <joint name="imu_joint" type="fixed">
+            <axis xyz="0 1 0"/>
+            <parent link="base_link"/>
+            <child link="imu_link"/>
+            <origin xyz="0 0 0" />
+        </joint>
+	</xacro:macro> -->
+
+</robot>

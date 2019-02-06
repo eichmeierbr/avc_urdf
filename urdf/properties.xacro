@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="mintaur">
+
+	<!-- X axis direction is forward, Y axis direction is left -->
+
+ <!-- ______________Chassis parameters__________________________ -->
+    <xacro:property name="chassisL" value="0.51" />
+    <xacro:property name="chassisW" value="0.2" />
+    <xacro:property name="chassisH" value="0.15" />
+
+
+    <xacro:property name="chassisMass" value="10"/>
+    <xacro:property name="chassisIxx" value="0.4"/>
+    <xacro:property name="chassisIxy" value="0.4"/>
+    <xacro:property name="chassisIyy" value="0.4"/>
+    <xacro:property name="chassisIxz" value="0.4"/>
+    <xacro:property name="chassisIyz" value="0.4"/>
+    <xacro:property name="chassisIzz" value="0.4"/>
+
+     <xacro:property name="chassisScale" value="0.15"/>
+
+
+
+
+ <!-- ______________Wheel parameters__________________________ -->
+    <!-- Wheel Rotation Limits> -->
+    <xacro:property name="llimit" value="-0.785" />
+    <xacro:property name="ulimit" value="0.785" />
+
+    <!-- Wheel Locations -->
+    <xacro:property name="rightWheelDist" value="-.1215" />
+    <xacro:property name="leftWheelDist" value=".1215" />
+    <xacro:property name="frontWheelDist" value="0.1535" />
+    <xacro:property name="backWheelDist" value="-0.1763" />
+
+    <xacro:property name="wheelDrop" value="-0.075" />
+
+
+    <!-- Wheel Physical Propreties-->
+    <xacro:property name="wheelThickness" value="0.043" />
+    <xacro:property name="wheelRadius" value="0.05"/>
+    <xacro:property name="axleEffort" value="0.001"/>
+    <xacro:property name="axleVelocity" value="0.5"/>
+
+    <xacro:property name="wheelMass" value="10"/>
+    <xacro:property name="wheelIxx" value="0.4"/>
+    <xacro:property name="wheelIxy" value="0.4"/>
+    <xacro:property name="wheelIyy" value="0.4"/>
+    <xacro:property name="wheelIxz" value="0.4"/>
+    <xacro:property name="wheelIyz" value="0.4"/>
+    <xacro:property name="wheelIzz" value="0.4"/>
+
+    <!-- Wheel Gazebo and Inertial Properties -->
+    <xacro:property name="wheelMu1" value="200"/>
+    <xacro:property name="wheelMu2" value="100"/>    
+    <xacro:property name="wheelKp" value="10000000.0"/>
+    <xacro:property name="wheelKd" value="1.0"/>
+
+
+
+ <!-- ______________IMU parameters__________________________ -->
+    <!-- <xacro:property name="imuL" value="0.05" />
+    <xacro:property name="imuW" value="0.05" />
+    <xacro:property name="imuH" value="0.05" />
+
+    <xacro:property name="imuMass" value="10"/>
+    <xacro:property name="imuIxx" value="0.4"/>
+    <xacro:property name="imuIxy" value="0.4"/>
+    <xacro:property name="imuIyy" value="0.4"/>
+    <xacro:property name="imuIxz" value="0.4"/>
+    <xacro:property name="imuIyz" value="0.4"/>
+    <xacro:property name="imuIzz" value="0.4"/> -->
+
+
+</robot>

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="mintaur">
+
+
+	<xacro:macro name="box_geometry">
+       <geometry>
+            <box size = "${chassisL} ${chassisW} ${chassisH} "/>
+        </geometry>
+	</xacro:macro>
+
+    <!-- <xacro:macro name="imu_geometry">
+       <geometry>
+            <box size = "${imuL} ${imuW} ${imuH} "/>
+        </geometry>
+	</xacro:macro> -->
+
+    <xacro:macro name="wheel_geometry">
+        <geometry>
+            <cylinder length="${wheelThickness}" radius="${wheelRadius}"/>
+        </geometry>
+        <origin rpy="1.57075 0 0" xyz="0 0 0"/>
+	</xacro:macro>
+
+</robot>

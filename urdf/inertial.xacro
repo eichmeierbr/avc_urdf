@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="mintaur">
+
+
+	<xacro:macro name="box_inertial">
+		<inertial>
+			<mass value="${chassisMass}"/>
+			<inertia ixx="${chassisIxx}" ixy="${chassisIxy}" ixz="${chassisIxz}" iyy="${chassisIyy}" iyz="${chassisIyz}" izz="${chassisIzz}"/>
+		</inertial>
+	</xacro:macro>
+
+
+	<xacro:macro name="wheel_inertial">
+		<inertial>
+            <mass value="${wheelMass}"/>
+            <inertia ixx="${wheelIxx}" ixy="${wheelIxy}" ixz="${wheelIxz}" iyy="${wheelIyy}" iyz="${wheelIyz}" izz="${wheelIzz}"/>
+		</inertial>
+	</xacro:macro>
+
+	<!-- <xacro:macro name="imu_inertial">
+		<inertial>
+            <mass value="${imuMass}"/>
+            <inertia ixx="${imuIxx}" ixy="${imuIxy}" ixz="${imuIxz}" iyy="${imuIyy}" iyz="${imuIyz}" izz="${imuIzz}"/>
+		</inertial>
+	</xacro:macro> -->
+
+	<xacro:macro name="axle_inertial">
+	    <inertial>
+            <mass value="0.001"/>
+            <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0"/>
+        </inertial>
+	</xacro:macro>
+
+
+</robot>
