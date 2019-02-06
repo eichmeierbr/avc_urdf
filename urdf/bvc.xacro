@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="mintaur">
 
-    <xacro:include filename="/home/eichmeierbr/mrob/src/miniProject/urdf/experiment/materials.xacro" />
-	<xacro:include filename="/home/eichmeierbr/mrob/src/miniProject/urdf/experiment/properties.xacro" />
-    <xacro:include filename="/home/eichmeierbr/mrob/src/miniProject/urdf/experiment/links.xacro" />
+    <xacro:include filename="$(find avc_urdf)/urdf/materials.xacro" />
+	<xacro:include filename="$(find avc_urdf)/urdf/properties.xacro" />
+    <xacro:include filename="$(find avc_urdf)/urdf/links.xacro" />
 
 
   <xacro:base_link/>
@@ -16,7 +16,7 @@
   <!-- <xacro:imu /> -->
 
 
-    <xacro:include filename="/home/eichmeierbr/mrob/src/miniProject/urdf/experiment/gazebo.xacro" />
+    <xacro:include filename="$(find avc_urdf)/urdf/gazebo.xacro" />
 
 
 </robot>

@@ -1,6 +1,13 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(avc_urdf)
 
+find_package(catkin REQUIRED)
+
+catkin_package()
+
+install(DIRECTORY meshes launch urdf build
+  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
+
 ## Compile as C++11, supported in ROS Kinetic and newer
 # add_compile_options(-std=c++11)
 

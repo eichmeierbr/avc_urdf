@@ -11,7 +11,7 @@
     <link name="base_link">
         <visual>
             <geometry>
-                <mesh filename="/home/eichmeierbr/mrob/src/miniProject/urdf/meshes/chassis.DAE" scale="${chassisScale} ${chassisScale} ${chassisScale}"/>
+                <mesh filename="$(find avc_urdf)/meshes/chassis.DAE" scale="${chassisScale} ${chassisScale} ${chassisScale}"/>
             </geometry>
             <origin rpy="1.57 0 3.14" xyz="0 0 0" />
             <!-- <xacro:box_geometry />
