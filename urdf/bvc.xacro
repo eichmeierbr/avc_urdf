@@ -13,7 +13,9 @@
   <xacro:wheel side="right" fob="back" sideDim="${rightWheelDist}" fobDim="${backWheelDist}" />
   <xacro:wheel side="left" fob="back" sideDim="${leftWheelDist}" fobDim="${backWheelDist}" />
 
+
   <!-- <xacro:imu /> -->
+  <!-- <xacro:lidar /> TODO -->
 
 
     <xacro:include filename="$(find avc_urdf)/urdf/gazebo.xacro" />

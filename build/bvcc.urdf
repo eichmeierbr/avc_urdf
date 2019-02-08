@@ -32,6 +32,12 @@
     <color rgba="1.0 1.0 1.0 0.4"/>
   </material>
   <!-- X axis direction is forward, Y axis direction is left -->
+  
+
+
+-.125 -.07 -.085
+
+ 
   <!-- ______________IMU parameters__________________________ -->
   <!-- <xacro:property name="imuL" value="0.05" />
     <xacro:property name="imuW" value="0.05" />
@@ -63,6 +69,20 @@
             <box size = "${imuL} ${imuW} ${imuH} "/>
         </geometry>
 	</xacro:macro> -->
+  <!-- <xacro:macro name="chassis_box_link">
+    <link name="chassis_box_link">
+        <visual>
+            <xacro:box_geometry />
+            <material name="blue" />
+        </visual>
+        <collision>
+            <xacro:box_geometry />
+        </collision>
+        <xacro:box_inertial />
+    </link>
+
+    <xacro:chassis_box_joint />
+</xacro:macro> -->
   <!-- <xacro:macro name="imu">
     <link name="imu_link">
         <visual>
@@ -80,11 +100,9 @@
   <link name="base_link">
     <visual>
       <geometry>
-        <mesh filename="/home/eichmeierbr/mrob/src/miniProject/urdf/avc_urdf/meshes/chassis.DAE" scale="0.15 0.15 0.15"/>
+        <mesh filename="/home/eichmeierbr/mrob/src/miniProject/urdf/avc_urdf/meshes/chassis2.DAE" scale="0.001 0.001 0.001"/>
       </geometry>
-      <origin rpy="1.57 0 3.14" xyz="0 0 0"/>
-      <!-- <xacro:box_geometry />
-            <material name="blue"/> -->
+      <origin rpy="1.57 0 0" xyz="-0.125 -0.07 -0.085"/>
     </visual>
     <collision>
       <geometry>
@@ -99,10 +117,9 @@
   <link name="right_front_wheel">
     <visual>
       <geometry>
-        <cylinder length="0.043" radius="0.05"/>
+        <mesh filename="/home/eichmeierbr/mrob/src/miniProject/urdf/avc_urdf/meshes/wheels.DAE" scale="0.001 0.001 0.001"/>
       </geometry>
-      <origin rpy="1.57075 0 0" xyz="0 0 0"/>
-      <material name="white"/>
+      <origin rpy="1.57 0 0" xyz="0 0.022 0"/>
     </visual>
     <collision>
       <geometry>
@@ -147,10 +164,9 @@
   <link name="left_front_wheel">
     <visual>
       <geometry>
-        <cylinder length="0.043" radius="0.05"/>
+        <mesh filename="/home/eichmeierbr/mrob/src/miniProject/urdf/avc_urdf/meshes/wheels.DAE" scale="0.001 0.001 0.001"/>
       </geometry>
-      <origin rpy="1.57075 0 0" xyz="0 0 0"/>
-      <material name="white"/>
+      <origin rpy="1.57 0 3.14" xyz="0 0.022 0"/>
     </visual>
     <collision>
       <geometry>
@@ -195,10 +211,9 @@
   <link name="right_back_wheel">
     <visual>
       <geometry>
-        <cylinder length="0.043" radius="0.05"/>
+        <mesh filename="/home/eichmeierbr/mrob/src/miniProject/urdf/avc_urdf/meshes/wheels.DAE" scale="0.001 0.001 0.001"/>
       </geometry>
-      <origin rpy="1.57075 0 0" xyz="0 0 0"/>
-      <material name="white"/>
+      <origin rpy="1.57 0 0" xyz="0 0.022 0"/>
     </visual>
     <collision>
       <geometry>
@@ -221,10 +236,9 @@
   <link name="left_back_wheel">
     <visual>
       <geometry>
-        <cylinder length="0.043" radius="0.05"/>
+        <mesh filename="/home/eichmeierbr/mrob/src/miniProject/urdf/avc_urdf/meshes/wheels.DAE" scale="0.001 0.001 0.001"/>
       </geometry>
-      <origin rpy="1.57075 0 0" xyz="0 0 0"/>
-      <material name="white"/>
+      <origin rpy="1.57 0 3.14" xyz="0 0.022 0"/>
     </visual>
     <collision>
       <geometry>
@@ -244,7 +258,9 @@
     <origin xyz="-0.1763 0.1215 -0.075"/>
   </joint>
   <!-- <xacro:wheel_gazebo side="${side}" fob="${fob}"> -->
+  <!-- <xacro:chassis_box_link /> -->
   <!-- <xacro:imu /> -->
+  <!-- <xacro:lidar /> TODO -->
   <gazebo>
     <plugin filename="libgazebo_ros_control.so" name="gazebo_ros_control">
       <robotNamespace>/</robotNamespace>
