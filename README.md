@@ -1,7 +1,7 @@
 # USU AVC URDF
 
 ## How to execute code:
-### build urdf file:
+### build urdf file: (NOTE: This step is optional)
 
 ```
 $ xacro --inorder bvc.xacro > build/<desired_file_name.urdf>
@@ -9,7 +9,7 @@ $ xacro --inorder bvc.xacro > build/<desired_file_name.urdf>
 ```
 ### Then launch using either gazebo or rviz
 ```
-$ roslaunch avc_urdf display.launch model:=<file_name.urdf>
+$ roslaunch avc_urdf display.launch
 
 $ roslaunch avc_urdf gazebo.launch
 ```
