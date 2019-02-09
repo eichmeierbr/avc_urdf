@@ -11,7 +11,7 @@ $ xacro --inorder bvc.xacro > build/<desired_file_name.urdf>
 ```
 $ roslaunch avc_urdf display.launch model:=<file_name.urdf>
 
-$ roslaunch avc_urdf gazebo.launch model:=<file_name.urdf>
+$ roslaunch avc_urdf gazebo.launch
 ```
 
 ## Robot Description

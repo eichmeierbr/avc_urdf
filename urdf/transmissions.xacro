@@ -8,7 +8,8 @@
                 <mechanicalReduction>1</mechanicalReduction>
             </actuator>
             <joint name="base_to_${side}_${fob}_axle">
-                <hardwareInterface>PositionJointInterface</hardwareInterface>
+                <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+                <!-- <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface> -->
             </joint>
         </transmission>
 	</xacro:macro>

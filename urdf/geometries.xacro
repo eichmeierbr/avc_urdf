@@ -4,7 +4,7 @@
 
     <xacro:macro name="chassis_mesh_geometry">
         <geometry>
-            <mesh filename="$(find avc_urdf)/meshes/chassis2.DAE" scale="${chassisScale} ${chassisScale} ${chassisScale}"/>
+            <mesh filename="file:///$(find avc_urdf)/meshes/chassis2.DAE" scale="${chassisScale} ${chassisScale} ${chassisScale}"/>
          </geometry>
          <origin rpy="1.57 0 0" xyz="${chassisMeshXoffset} ${chassisMeshYoffset} ${chassisMeshZoffset}" />
 	</xacro:macro>
@@ -24,13 +24,13 @@
 
     <xacro:macro name="wheel_mesh_geometry" params="side">
         <geometry>
-            <mesh filename="$(find avc_urdf)/meshes/wheels.DAE" scale="${wheelScale} ${wheelScale} ${wheelScale}"/>
+            <mesh filename="file:///$(find avc_urdf)/meshes/wheels.DAE" scale="${wheelScale} ${wheelScale} ${wheelScale}"/>
          </geometry>
             <xacro:if value="${side =='right'}">
                 <origin rpy="1.57 0 0" xyz="0 ${wheelMeshYoffset} 0" />
             </xacro:if>
             <xacro:if value="${side =='left'}">
-                <origin rpy="1.57 0 3.14" xyz="${wheelMeshXoffset} ${wheelMeshYoffset} ${wheelMeshZoffset}" />
+                <origin rpy="1.57 0 3.14" xyz="${wheelMeshXoffset} ${wheelMeshYoffsetLeft} ${wheelMeshZoffset}" />
             </xacro:if>
 	</xacro:macro>
 

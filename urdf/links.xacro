@@ -11,6 +11,7 @@
     <link name="base_link">
         <visual>
             <xacro:chassis_mesh_geometry />
+            <material name="white" />
         </visual>
         <collision>
             <xacro:box_geometry />
@@ -26,6 +27,7 @@
     <link name="${side}_${fob}_wheel">
         <visual>
             <xacro:wheel_mesh_geometry side="${side}"/>
+            <material name="black" />
         </visual>
         <collision>
             <xacro:wheel_geometry />

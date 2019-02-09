@@ -32,12 +32,6 @@
     <color rgba="1.0 1.0 1.0 0.4"/>
   </material>
   <!-- X axis direction is forward, Y axis direction is left -->
-  
-
-
--.125 -.07 -.085
-
- 
   <!-- ______________IMU parameters__________________________ -->
   <!-- <xacro:property name="imuL" value="0.05" />
     <xacro:property name="imuW" value="0.05" />
@@ -69,20 +63,6 @@
             <box size = "${imuL} ${imuW} ${imuH} "/>
         </geometry>
 	</xacro:macro> -->
-  <!-- <xacro:macro name="chassis_box_link">
-    <link name="chassis_box_link">
-        <visual>
-            <xacro:box_geometry />
-            <material name="blue" />
-        </visual>
-        <collision>
-            <xacro:box_geometry />
-        </collision>
-        <xacro:box_inertial />
-    </link>
-
-    <xacro:chassis_box_joint />
-</xacro:macro> -->
   <!-- <xacro:macro name="imu">
     <link name="imu_link">
         <visual>
@@ -100,7 +80,7 @@
   <link name="base_link">
     <visual>
       <geometry>
-        <mesh filename="/home/eichmeierbr/mrob/src/miniProject/urdf/avc_urdf/meshes/chassis2.DAE" scale="0.001 0.001 0.001"/>
+        <mesh filename="/home/eichmeierbr/mrob/src/avc_urdf/meshes/chassis2.DAE" scale="0.001 0.001 0.001"/>
       </geometry>
       <origin rpy="1.57 0 0" xyz="-0.125 -0.07 -0.085"/>
     </visual>
@@ -110,14 +90,14 @@
       </geometry>
     </collision>
     <inertial>
-      <mass value="10"/>
-      <inertia ixx="0.4" ixy="0.4" ixz="0.4" iyy="0.4" iyz="0.4" izz="0.4"/>
+      <mass value="1"/>
+      <inertia ixx="0.4" ixy="0.4" ixz="0.0" iyy="0.4" iyz="0.0" izz="0.0"/>
     </inertial>
   </link>
   <link name="right_front_wheel">
     <visual>
       <geometry>
-        <mesh filename="/home/eichmeierbr/mrob/src/miniProject/urdf/avc_urdf/meshes/wheels.DAE" scale="0.001 0.001 0.001"/>
+        <mesh filename="/home/eichmeierbr/mrob/src/avc_urdf/meshes/wheels.DAE" scale="0.001 0.001 0.001"/>
       </geometry>
       <origin rpy="1.57 0 0" xyz="0 0.022 0"/>
     </visual>
@@ -128,8 +108,8 @@
       <origin rpy="1.57075 0 0" xyz="0 0 0"/>
     </collision>
     <inertial>
-      <mass value="10"/>
-      <inertia ixx="0.4" ixy="0.4" ixz="0.4" iyy="0.4" iyz="0.4" izz="0.4"/>
+      <mass value="1"/>
+      <inertia ixx="0.4" ixy="0.0" ixz="0.0" iyy="0.4" iyz="0.0" izz="0.4"/>
     </inertial>
   </link>
   <link name="right_front_axle">
@@ -157,14 +137,15 @@
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
     <joint name="base_to_right_front_axle">
-      <hardwareInterface>PositionJointInterface</hardwareInterface>
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+      <!-- <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface> -->
     </joint>
   </transmission>
   <!-- <xacro:wheel_gazebo side="${side}" fob="${fob}"> -->
   <link name="left_front_wheel">
     <visual>
       <geometry>
-        <mesh filename="/home/eichmeierbr/mrob/src/miniProject/urdf/avc_urdf/meshes/wheels.DAE" scale="0.001 0.001 0.001"/>
+        <mesh filename="/home/eichmeierbr/mrob/src/avc_urdf/meshes/wheels.DAE" scale="0.001 0.001 0.001"/>
       </geometry>
       <origin rpy="1.57 0 3.14" xyz="0 0.022 0"/>
     </visual>
@@ -175,8 +156,8 @@
       <origin rpy="1.57075 0 0" xyz="0 0 0"/>
     </collision>
     <inertial>
-      <mass value="10"/>
-      <inertia ixx="0.4" ixy="0.4" ixz="0.4" iyy="0.4" iyz="0.4" izz="0.4"/>
+      <mass value="1"/>
+      <inertia ixx="0.4" ixy="0.0" ixz="0.0" iyy="0.4" iyz="0.0" izz="0.4"/>
     </inertial>
   </link>
   <link name="left_front_axle">
@@ -204,14 +185,15 @@
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
     <joint name="base_to_left_front_axle">
-      <hardwareInterface>PositionJointInterface</hardwareInterface>
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+      <!-- <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface> -->
     </joint>
   </transmission>
   <!-- <xacro:wheel_gazebo side="${side}" fob="${fob}"> -->
   <link name="right_back_wheel">
     <visual>
       <geometry>
-        <mesh filename="/home/eichmeierbr/mrob/src/miniProject/urdf/avc_urdf/meshes/wheels.DAE" scale="0.001 0.001 0.001"/>
+        <mesh filename="/home/eichmeierbr/mrob/src/avc_urdf/meshes/wheels.DAE" scale="0.001 0.001 0.001"/>
       </geometry>
       <origin rpy="1.57 0 0" xyz="0 0.022 0"/>
     </visual>
@@ -222,8 +204,8 @@
       <origin rpy="1.57075 0 0" xyz="0 0 0"/>
     </collision>
     <inertial>
-      <mass value="10"/>
-      <inertia ixx="0.4" ixy="0.4" ixz="0.4" iyy="0.4" iyz="0.4" izz="0.4"/>
+      <mass value="1"/>
+      <inertia ixx="0.4" ixy="0.0" ixz="0.0" iyy="0.4" iyz="0.0" izz="0.4"/>
     </inertial>
   </link>
   <joint name="right_back_wheel_joint" type="continuous">
@@ -236,7 +218,7 @@
   <link name="left_back_wheel">
     <visual>
       <geometry>
-        <mesh filename="/home/eichmeierbr/mrob/src/miniProject/urdf/avc_urdf/meshes/wheels.DAE" scale="0.001 0.001 0.001"/>
+        <mesh filename="/home/eichmeierbr/mrob/src/avc_urdf/meshes/wheels.DAE" scale="0.001 0.001 0.001"/>
       </geometry>
       <origin rpy="1.57 0 3.14" xyz="0 0.022 0"/>
     </visual>
@@ -247,8 +229,8 @@
       <origin rpy="1.57075 0 0" xyz="0 0 0"/>
     </collision>
     <inertial>
-      <mass value="10"/>
-      <inertia ixx="0.4" ixy="0.4" ixz="0.4" iyy="0.4" iyz="0.4" izz="0.4"/>
+      <mass value="1"/>
+      <inertia ixx="0.4" ixy="0.0" ixz="0.0" iyy="0.4" iyz="0.0" izz="0.4"/>
     </inertial>
   </link>
   <joint name="left_back_wheel_joint" type="continuous">
@@ -258,13 +240,13 @@
     <origin xyz="-0.1763 0.1215 -0.075"/>
   </joint>
   <!-- <xacro:wheel_gazebo side="${side}" fob="${fob}"> -->
-  <!-- <xacro:chassis_box_link /> -->
   <!-- <xacro:imu /> -->
   <!-- <xacro:lidar /> TODO -->
   <gazebo>
     <plugin filename="libgazebo_ros_control.so" name="gazebo_ros_control">
       <robotNamespace>/</robotNamespace>
-      <!-- <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType> -->
+      <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
+      <legacyModeNS>true</legacyModeNS>
     </plugin>
   </gazebo>
 </robot>

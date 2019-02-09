@@ -9,13 +9,13 @@
     <xacro:property name="chassisH" value="0.15" />
 
 
-    <xacro:property name="chassisMass" value="10"/>
+    <xacro:property name="chassisMass" value="1"/>
     <xacro:property name="chassisIxx" value="0.4"/>
     <xacro:property name="chassisIxy" value="0.4"/>
     <xacro:property name="chassisIyy" value="0.4"/>
-    <xacro:property name="chassisIxz" value="0.4"/>
-    <xacro:property name="chassisIyz" value="0.4"/>
-    <xacro:property name="chassisIzz" value="0.4"/>
+    <xacro:property name="chassisIxz" value="0.0"/>
+    <xacro:property name="chassisIyz" value="0.0"/>
+    <xacro:property name="chassisIzz" value="0.0"/>
 
      <xacro:property name="chassisScale" value="0.001"/>
 
@@ -41,6 +41,7 @@
 
     <xacro:property name="wheelMeshXoffset" value="0"/>
     <xacro:property name="wheelMeshYoffset" value="0.022"/>
+   <xacro:property name="wheelMeshYoffsetLeft" value="-0.022"/>
     <xacro:property name="wheelMeshZoffset" value="0"/>
 
 
@@ -51,13 +52,13 @@
     <xacro:property name="axleEffort" value="0.001"/>
     <xacro:property name="axleVelocity" value="0.5"/>
 
-    <xacro:property name="wheelMass" value="10"/>
+    <xacro:property name="wheelMass" value="1"/>
     <xacro:property name="wheelIxx" value="0.4"/>
-    <xacro:property name="wheelIxy" value="0.4"/>
     <xacro:property name="wheelIyy" value="0.4"/>
-    <xacro:property name="wheelIxz" value="0.4"/>
-    <xacro:property name="wheelIyz" value="0.4"/>
     <xacro:property name="wheelIzz" value="0.4"/>
+    <xacro:property name="wheelIxy" value="0.0"/>
+    <xacro:property name="wheelIxz" value="0.0"/>
+    <xacro:property name="wheelIyz" value="0.0"/>
 
     <!-- Wheel Gazebo and Inertial Properties -->
     <xacro:property name="wheelMu1" value="200"/>

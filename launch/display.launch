@@ -1,6 +1,6 @@
 <launch>
 
-  <arg name="model" />
+  <arg name="model" default="$(find avc_urdf)/urdf/bvc.xacro" />
   <arg name="gui" default="true" />
   <arg name="rvizconfig" default="$(find urdf_tutorial)/rviz/urdf.rviz" />
 
