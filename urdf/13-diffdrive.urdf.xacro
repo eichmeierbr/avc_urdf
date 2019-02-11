@@ -9,19 +9,27 @@
   <xacro:property name="baselen" value="0.4" />
   <xacro:property name="wheeldiam" value="0.07" />
   <xacro:property name="pi" value="3.1415" />
-  <xacro:property name="chassisL" value="0.51" />
+  <!-- <xacro:property name="chassisL" value="0.51" />
   <xacro:property name="chassisW" value="0.2" />
-  <xacro:property name="chassisH" value="0.15" />
+  <xacro:property name="chassisH" value="0.15" /> -->
   <xacro:property name="seperationWheelDist" value=".1215" />
-  <xacro:property name="frontWheelDist" value="0.1535" />
+  <!-- <xacro:property name="frontWheelDist" value="0.1535" />
   <xacro:property name="backWheelDist" value="-0.1763" />
 
   <xacro:property name="chassisScale" value="0.001"/>
-
   <xacro:property name="chassisMeshXoffset" value="-0.125"/>
   <xacro:property name="chassisMeshYoffset" value="-0.070"/>
   <xacro:property name="chassisMeshZoffset" value="-0.085"/>
+  <xacro:property name="wheelDrop" value="-0.075" />
+  <xacro:property name="wheelScale" value="0.001"/>
 
+  <xacro:property name="wheelMeshXoffset" value="0"/>
+  <xacro:property name="wheelMeshYoffset" value="0.022"/>
+  <xacro:property name="wheelMeshYoffsetLeft" value="-0.022"/>
+  <xacro:property name="wheelMeshZoffset" value="0"/> -->
+
+  <xacro:include filename="$(find avc_urdf)/urdf/properties.xacro" />
+  <xacro:include filename="$(find avc_urdf)/urdf/geometries.xacro" />
 
   <material name="blue">
     <color rgba="0 0 0.8 1"/>
@@ -61,20 +69,15 @@
 
     <link name="${prefix}_${suffix}_wheel">
       <visual>
-        <origin xyz="0 0 0" rpy="${pi/2} 0 0" />
-        <geometry>
-          <cylinder radius="${wheeldiam/2}" length="0.1"/>
-        </geometry>
-        <material name="black"/>
+        <xacro:wheel_mesh_geometry side="${prefix}"/>
+        <material name="black" />
       </visual>
       <collision>
-        <origin xyz="0 0 0" rpy="${pi/2} 0 0" />
-        <geometry>
-          <cylinder radius="${wheeldiam/2}" length="0.1"/>
-        </geometry>
+        <xacro:wheel_geometry />
       </collision>
       <xacro:default_inertial mass="1"/>
     </link>
+
     <joint name="${prefix}_${suffix}_wheel_joint" type="continuous">
       <axis xyz="0 1 0" rpy="0 0 0" />
       <parent link="base_link"/>
