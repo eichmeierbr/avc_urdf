@@ -8,10 +8,10 @@
 
   <xacro:base_link/>
 
-  <xacro:wheel side="right" fob="front" sideDim="${rightWheelDist}" fobDim="${frontWheelDist}" />
-  <xacro:wheel side="left" fob="front" sideDim="${leftWheelDist}" fobDim="${frontWheelDist}" />
-  <xacro:wheel side="right" fob="back" sideDim="${rightWheelDist}" fobDim="${backWheelDist}" />
-  <xacro:wheel side="left" fob="back" sideDim="${leftWheelDist}" fobDim="${backWheelDist}" />
+  <xacro:wheel prefix="right" suffix="front" fb="${frontWheelDist}" lr="${-seperationWheelDist}"/>
+  <xacro:wheel prefix="left" suffix="front" fb="${frontWheelDist}" lr="${seperationWheelDist}"/>
+  <xacro:wheel prefix="right" suffix="back" fb="${backWheelDist}" lr="${-seperationWheelDist}"/>
+  <xacro:wheel prefix="left" suffix="back" fb="${backWheelDist}" lr="${seperationWheelDist}"/>
 
 
   <!-- <xacro:imu /> -->

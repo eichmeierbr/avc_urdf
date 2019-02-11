@@ -6,60 +6,68 @@
 	<xacro:include filename="$(find avc_urdf)/urdf/transmissions.xacro" />
     <xacro:include filename="$(find avc_urdf)/urdf/geometries.xacro" />
 
+
 <xacro:macro name="base_link">
-    <link name="base_link">
-        <visual>
-            <xacro:chassis_mesh_geometry />
-            <material name="white" />
-        </visual>
-        <collision>
-            <xacro:box_geometry />
-        </collision>
-        <xacro:box_inertial />
-    </link>
+ <link name="base_link">
+    <visual>
+      <geometry>
+        <mesh filename="file:///$(find avc_urdf)/meshes/chassis2.DAE" scale="${chassisScale} ${chassisScale} ${chassisScale}"/>
+      </geometry>
+      <origin rpy="1.57 0 0" xyz="${chassisMeshXoffset} ${chassisMeshYoffset} ${chassisMeshZoffset}" />
+    </visual>
+    <collision>
+      <geometry>
+        <box size = "${chassisL} ${chassisW} ${chassisH} "/>
+      </geometry>
+    </collision>
+    <xacro:default_inertial mass="10"/>
+  </link>
 </xacro:macro>
 
 
-<xacro:macro name="wheel" params="side fob sideDim fobDim">
+  <xacro:macro name="wheel" params="prefix suffix fb lr">
 
-
-    <link name="${side}_${fob}_wheel">
-        <visual>
-            <xacro:wheel_mesh_geometry side="${side}"/>
-            <material name="black" />
-        </visual>
-        <collision>
-            <xacro:wheel_geometry />
-        </collision>
-        <xacro:wheel_inertial />
+    <link name="${prefix}_${suffix}_wheel">
+      <visual>
+        <xacro:wheel_mesh_geometry side="${prefix}"/>
+        <material name="black" />
+      </visual>
+      <collision>
+        <xacro:wheel_geometry />
+      </collision>
+      <xacro:default_inertial mass="1"/>
     </link>
 
+    <joint name="${prefix}_${suffix}_wheel_joint" type="continuous">
+      <axis xyz="0 1 0" rpy="0 0 0" />
+      <parent link="base_link"/>
+      <child link="${prefix}_${suffix}_wheel"/>
+      <origin xyz="${fb} ${lr} -${wheeldiam/2+.05}" rpy="0 0 0"/>
+    </joint>
 
-    <!-- Use this block for a front wheel -->
-    <xacro:if value="${fob =='front'}">
+    <!-- This block provides the simulator (Gazebo) with information on a few additional
+    physical properties. See http://gazebosim.org/tutorials/?tut=ros_urdf for more-->
+    <gazebo reference="${prefix}_${suffix}_wheel">
+      <mu1 value="200.0"/>
+      <mu2 value="100.0"/>
+      <kp value="10000000.0" />
+      <kd value="1.0" />
+      <material>Gazebo/Grey</material>
+    </gazebo>
 
-        <link name="${side}_${fob}_axle">
-            <xacro:axle_inertial />
-        </link>
+    <!-- This block connects the wheel joint to an actuator (motor), which informs both
+    simulation and visualization of the robot -->
+    <transmission name="${prefix}_${suffix}_wheel_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <actuator name="${prefix}_${suffix}_wheel_motor">
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+      <joint name="${prefix}_${suffix}_wheel_joint">
+        <hardwareInterface>VelocityJointInterface</hardwareInterface>
+      </joint>
+    </transmission>
 
-        <xacro:axle_joint side="${side}" fob="${fob}" sideDim="${sideDim}" fobDim="${fobDim}"/>
-
-
-        <xacro:front_wheel_joint side="${side}" fob="${fob}" sideDim="${sideDim}" fobDim="${fobDim}"/>
-        <xacro:axle_transmission side="${side}" fob="${fob}"/>
-
-    </xacro:if>
-
-    <!-- Use this block for a rear wheel -->
-    <xacro:if value="${fob =='back'}">
-        <xacro:rear_wheel_joint side="${side}" fob="${fob}" sideDim="${sideDim}" fobDim="${fobDim}"/>
-    </xacro:if>
-
-
-    <xacro:wheel_gazebo side="${side}" fob="${fob}"/>
-</xacro:macro>
-
-
+  </xacro:macro>
 <!-- <xacro:macro name="imu">
     <link name="imu_link">
         <visual>
