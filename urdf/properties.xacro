@@ -65,20 +65,25 @@
     <xacro:property name="wheelKp" value="10000000.0"/>
     <xacro:property name="wheelKd" value="1.0"/>
 
-
-
  <!-- ______________IMU parameters__________________________ -->
-    <!-- <xacro:property name="imuL" value="0.05" />
-    <xacro:property name="imuW" value="0.05" />
-    <xacro:property name="imuH" value="0.05" />
-
-    <xacro:property name="imuMass" value="10"/>
+    <xacro:property name="imuL" value="0.064" />
+    <xacro:property name="imuW" value="0.028" />
+    <xacro:property name="imuH" value="0.007" />
+imu
+imu
+    <xacro:property name="imuMass" value="0.1"/>
     <xacro:property name="imuIxx" value="0.4"/>
     <xacro:property name="imuIxy" value="0.4"/>
     <xacro:property name="imuIyy" value="0.4"/>
     <xacro:property name="imuIxz" value="0.4"/>
     <xacro:property name="imuIyz" value="0.4"/>
-    <xacro:property name="imuIzz" value="0.4"/> -->
+    <xacro:property name="imuIzz" value="0.4"/>
+
+     <!-- <xacro:property name="imuScale" value="0.001"/> -->
+
+    <xacro:property name="imuMeshXoffset" value="0.077"/>
+    <xacro:property name="imuMeshYoffset" value="0.070"/>
+    <xacro:property name="imuMeshZoffset" value="0.077"/>
 
 
 </robot>

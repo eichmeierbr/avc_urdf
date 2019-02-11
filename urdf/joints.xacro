@@ -33,21 +33,21 @@
         </joint>
 	</xacro:macro>
 
-    <!-- <xacro:macro name="imu_joint">
+    <xacro:macro name="imu_joint">
         <joint name="imu_joint" type="fixed">
             <axis xyz="0 1 0"/>
             <parent link="base_link"/>
             <child link="imu_link"/>
             <origin xyz="0 0 0" />
         </joint>
-	</xacro:macro> -->
+	</xacro:macro>
 
     <xacro:macro name="chassis_box_joint">
         <joint name="chassis_box_joint" type="fixed">
             <axis xyz="0 1 0"/>
             <parent link="base_link"/>
             <child link="chassis_box_link"/>
-            <origin xyz="0 0 0" />
+            <origin xyz="-.5 0 0" />
         </joint>
 	</xacro:macro>
 

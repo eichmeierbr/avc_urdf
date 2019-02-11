@@ -17,12 +17,12 @@
 		</inertial>
 	</xacro:macro>
 
-	<!-- <xacro:macro name="imu_inertial">
+	<xacro:macro name="imu_inertial">
 		<inertial>
             <mass value="${imuMass}"/>
             <inertia ixx="${imuIxx}" ixy="${imuIxy}" ixz="${imuIxz}" iyy="${imuIyy}" iyz="${imuIyz}" izz="${imuIzz}"/>
 		</inertial>
-	</xacro:macro> -->
+	</xacro:macro>
 
 	<xacro:macro name="axle_inertial">
 	    <inertial>

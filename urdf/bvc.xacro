@@ -14,7 +14,7 @@
   <xacro:wheel side="left" fob="back" sideDim="${leftWheelDist}" fobDim="${backWheelDist}" />
 
 
-  <!-- <xacro:imu /> -->
+  <xacro:imu />
   <!-- <xacro:lidar /> TODO -->
 
 

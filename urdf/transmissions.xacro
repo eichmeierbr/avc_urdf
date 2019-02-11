@@ -26,4 +26,16 @@
         </transmission>
     </xacro:macro>
 
+    <xacro:macro name="imu_transmission" params="side fob">
+        <transmission name="${side}_${fob}_imu_trans">
+            <type>transmission_interface/SimpleTransmission</type>
+            <actuator name="${side}_${fob}_imu_motor">
+                <mechanicalReduction>1</mechanicalReduction>
+            </actuator>
+            <joint name="base_to_${side}_${fob}_imu">
+                <hardwareInterface>PositionJointInterface</hardwareInterface>
+            </joint>
+        </transmission>
+	</xacro:macro>
+
 </robot>

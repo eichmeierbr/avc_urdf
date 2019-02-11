@@ -10,7 +10,8 @@
 <xacro:macro name="base_link">
     <link name="base_link">
         <visual>
-            <xacro:chassis_mesh_geometry />
+            <!-- <xacro:chassis_mesh_geometry /> -->
+            <xacro:box_geometry />
         </visual>
         <collision>
             <xacro:box_geometry />
@@ -25,7 +26,8 @@
 
     <link name="${side}_${fob}_wheel">
         <visual>
-            <xacro:wheel_mesh_geometry side="${side}"/>
+            <!-- <xacro:wheel_mesh_geometry side="${side}"/> -->
+            <xacro:wheel_geometry />
         </visual>
         <collision>
             <xacro:wheel_geometry />
@@ -58,21 +60,18 @@
     <!-- <xacro:wheel_gazebo side="${side}" fob="${fob}"> -->
 </xacro:macro>
 
-
-<!-- <xacro:macro name="imu">
-    <link name="imu_link">
+<xacro:macro name="imu">
+    <link name="imu">
         <visual>
+            <!-- <xacro:imu_mesh_geometry /> -->
             <xacro:imu_geometry />
-            <material name="orange"/>
         </visual>
         <collision>
             <xacro:imu_geometry />
         </collision>
         <xacro:imu_inertial />
     </link>
-
     <xacro:imu_joint />
-</xacro:macro> -->
-
+</xacro:macro>
 
 </robot>
