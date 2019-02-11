@@ -16,6 +16,13 @@
   <xacro:property name="frontWheelDist" value="0.1535" />
   <xacro:property name="backWheelDist" value="-0.1763" />
 
+  <xacro:property name="chassisScale" value="0.001"/>
+
+  <xacro:property name="chassisMeshXoffset" value="-0.125"/>
+  <xacro:property name="chassisMeshYoffset" value="-0.070"/>
+  <xacro:property name="chassisMeshZoffset" value="-0.085"/>
+
+
   <material name="blue">
     <color rgba="0 0 0.8 1"/>
   </material>
@@ -38,9 +45,9 @@
   <link name="base_link">
     <visual>
       <geometry>
-        <box size = "${chassisL} ${chassisW} ${chassisH} "/>
+        <mesh filename="file:///$(find avc_urdf)/meshes/chassis2.DAE" scale="${chassisScale} ${chassisScale} ${chassisScale}"/>
       </geometry>
-      <material name="blue"/>
+      <origin rpy="1.57 0 0" xyz="${chassisMeshXoffset} ${chassisMeshYoffset} ${chassisMeshZoffset}" />
     </visual>
     <collision>
       <geometry>
@@ -99,10 +106,10 @@
 
   </xacro:macro>
 
-  <xacro:wheel prefix="right" suffix="front" fb="${frontWheelDist}" lr="${seperationWheelDist}"/>
-  <xacro:wheel prefix="left" suffix="front" fb="${frontWheelDist}" lr="${-seperationWheelDist}"/>
-  <xacro:wheel prefix="right" suffix="back" fb="${backWheelDist}" lr="${seperationWheelDist}"/>
-  <xacro:wheel prefix="left" suffix="back" fb="${backWheelDist}" lr="${-seperationWheelDist}"/>
+  <xacro:wheel prefix="right" suffix="front" fb="${frontWheelDist}" lr="${-seperationWheelDist}"/>
+  <xacro:wheel prefix="left" suffix="front" fb="${frontWheelDist}" lr="${seperationWheelDist}"/>
+  <xacro:wheel prefix="right" suffix="back" fb="${backWheelDist}" lr="${-seperationWheelDist}"/>
+  <xacro:wheel prefix="left" suffix="back" fb="${backWheelDist}" lr="${seperationWheelDist}"/>
 
   <!-- Gazebo plugin for ROS Control -->
   <gazebo>
