@@ -6,7 +6,6 @@
 	<xacro:include filename="$(find avc_urdf)/urdf/transmissions.xacro" />
     <xacro:include filename="$(find avc_urdf)/urdf/geometries.xacro" />
 
-
 <xacro:macro name="base_link">
     <link name="base_link">
         <visual>
@@ -57,7 +56,7 @@
     </xacro:if>
 
 
-    <!-- <xacro:wheel_gazebo side="${side}" fob="${fob}"> -->
+    <xacro:wheel_gazebo side="${side}" fob="${fob}"/>
 </xacro:macro>
 
 
