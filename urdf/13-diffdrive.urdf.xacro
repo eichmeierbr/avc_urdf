@@ -12,8 +12,9 @@
   <xacro:property name="chassisL" value="0.51" />
   <xacro:property name="chassisW" value="0.2" />
   <xacro:property name="chassisH" value="0.15" />
-
-
+  <xacro:property name="seperationWheelDist" value=".1215" />
+  <xacro:property name="frontWheelDist" value="0.1535" />
+  <xacro:property name="backWheelDist" value="-0.1763" />
 
   <material name="blue">
     <color rgba="0 0 0.8 1"/>
@@ -49,7 +50,7 @@
     <xacro:default_inertial mass="10"/>
   </link>
 
-  <xacro:macro name="wheel" params="prefix suffix reflect reflectL">
+  <xacro:macro name="wheel" params="prefix suffix fb lr">
 
     <link name="${prefix}_${suffix}_wheel">
       <visual>
@@ -71,7 +72,7 @@
       <axis xyz="0 1 0" rpy="0 0 0" />
       <parent link="base_link"/>
       <child link="${prefix}_${suffix}_wheel"/>
-      <origin xyz="${baselen*reflect/3} ${baselen*reflectL} -${wheeldiam/2+.05}" rpy="0 0 0"/>
+      <origin xyz="${fb} ${lr} -${wheeldiam/2+.05}" rpy="0 0 0"/>
     </joint>
 
     <!-- This block provides the simulator (Gazebo) with information on a few additional
@@ -98,12 +99,11 @@
 
   </xacro:macro>
 
+  <xacro:wheel prefix="right" suffix="front" fb="${frontWheelDist}" lr="${seperationWheelDist}"/>
+  <xacro:wheel prefix="left" suffix="front" fb="${frontWheelDist}" lr="${-seperationWheelDist}"/>
+  <xacro:wheel prefix="right" suffix="back" fb="${backWheelDist}" lr="${seperationWheelDist}"/>
+  <xacro:wheel prefix="left" suffix="back" fb="${backWheelDist}" lr="${-seperationWheelDist}"/>
 
-    <xacro:wheel prefix="right" suffix="front" reflect="1" reflectL="1"/>
-    <xacro:wheel prefix="left" suffix="front" reflect="1" reflectL="-1"/>
-    <xacro:wheel prefix="right" suffix="back" reflect="-1" reflectL="1"/>
-    <xacro:wheel prefix="left" suffix="back" reflect="-1" reflectL="-1"/>
-  
   <!-- Gazebo plugin for ROS Control -->
   <gazebo>
     <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
