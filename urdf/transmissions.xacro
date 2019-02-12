@@ -22,7 +22,7 @@
                 <mechanicalReduction>1</mechanicalReduction>
             </actuator>
             <joint name="${side}_${fob}_wheel_joint">
-                <hardwareInterface>VelocityJointInterface</hardwareInterface>
+                <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
             </joint>
         </transmission>
     </xacro:macro>
