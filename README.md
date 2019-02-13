@@ -51,22 +51,36 @@ and then again in geometries.xacro on lines 7, and 27 remove one of the / on the
 The four components of the robot are the frame, wheels, imu, and lidar.
 
 ### Frame
-The frame is the body of the robot where all the other parts are mounted. It is modeled using a 3D mesh of the frame.
+Description: The frame is the body of the robot where all the other parts are mounted. It is modeled using a 3D mesh of the frame.
+
+Where in Code: Instantiated in bvc.xacro line: 9.
+
+
+
 
 ### Wheels
-The wheels are attached to the frame and can rotate. A motor powers each wheel, and the front two wheels can twist in order to steer the vehicle. Each one is modeled using a 3D mesh of the wheel.
+
+Description: The wheels are attached to the frame and can rotate. A motor powers each wheel, and the front two wheels can twist in order to steer the vehicle. Each one is modeled using a 3D mesh of the wheel.
 
 Each wheel has a continuous wheel joint that allows the wheels to roll.
+The {left or right}_{front or back}_wheel_link connects to the base link via the {left or right}_{front or back}_wheel_joint
+
+Where in Code: Instantiated in bvc.xacro lines: 11-14.
+
 
 ### Imu
-The inertial measurement unit (imu) is fixed to the frame. It is modeled using a simple red box.
+Description: The inertial measurement unit (imu) is fixed to the frame. It is modeled using a simple red box.
 
-The imu joint is fixed.
+The imu_link is fixed to the base_link through the imu_joint
+
+Where in Code: Instantiated in bvc.xacro line: 16.
 
 ### Lidar
-The lidar is fixed to the top frame. It is modeled using a blue cylinder.
+Description: The lidar is fixed to the top frame via the base link. It is modeled using a blue cylinder.
 
-The lidar joint is fixed.
+The lidar_link is fixed to the base_link through the lidar_joint.
+
+Where in Code: Instantiated in bvc.xacro line: 17.
 
 ![This is a pic of the robot](https://github.com/eichmeierbr/avc_urdf/blob/master/real_robot.jpg)
 
