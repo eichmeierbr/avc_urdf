@@ -17,18 +17,16 @@
     <arg name="headless" value="$(arg headless)"/>
   </include>
 
-
   <param name="robot_description" command="$(find xacro)/xacro.py $(arg model)" />
 
   <!-- push robot_description to factory and spawn robot in gazebo -->
-  <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model"
-        args="-unpause -urdf -model robot -param robot_description" respawn="false" output="screen" />
+  <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" args="-unpause -urdf -model robot -param robot_description" respawn="false" output="screen" />
 
-  <node pkg="robot_state_publisher" type="robot_state_publisher"  name="robot_state_publisher">
+  <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
     <param name="publish_frequency" type="double" value="30.0" />
   </node>
 
-        <!-- _____________ This controls the PID parameters, but for some reason messes up the joints___________ -->
-   <!-- <rosparam command="load" file="$(find avc_urdf)/yaml/gazebo_ros_control_params.yaml"/> -->
+  <!-- _____________ This controls the PID parameters, but for some reason messes up the joints___________ -->
+  <!-- <rosparam command="load" file="$(find avc_urdf)/yaml/gazebo_ros_control_params.yaml"/> -->
 
 </launch>

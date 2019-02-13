@@ -1,7 +1,6 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="mintaur">
 
-
 	<xacro:macro name="box_inertial">
 		<inertial>
 			<mass value="${chassisMass}"/>
@@ -30,18 +29,17 @@
 		</inertial>
 	</xacro:macro>
 
-
 	<xacro:macro name="imu_inertial">
 		<inertial>
-            <mass value="${imuMass}"/>
-            <inertia ixx="${imuIxx}" ixy="${imuIxy}" ixz="${imuIxz}" iyy="${imuIyy}" iyz="${imuIyz}" izz="${imuIzz}"/>
+			<mass value="${imuMass}"/>
+			<inertia ixx="${imuIxx}" ixy="${imuIxy}" ixz="${imuIxz}" iyy="${imuIyy}" iyz="${imuIyz}" izz="${imuIzz}"/>
 		</inertial>
 	</xacro:macro>
 
 	<xacro:macro name="lidar_inertial">
 		<inertial>
-            	<mass value="${lidarMass}"/>
-            	<inertia ixx="${lidarIxx}" ixy="${lidarIxy}" ixz="${lidarIxz}" iyy="${lidarIyy}" iyz="${lidarIyz}" izz="${lidarIzz}"/>
+			<mass value="${lidarMass}"/>
+			<inertia ixx="${lidarIxx}" ixy="${lidarIxy}" ixz="${lidarIxz}" iyy="${lidarIyy}" iyz="${lidarIyz}" izz="${lidarIzz}"/>
 		</inertial>
 	</xacro:macro>
 

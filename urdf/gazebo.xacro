@@ -11,7 +11,6 @@
         </gazebo>
     </xacro:macro>
 
-
     <xacro:macro name="imu_gazebo">
         <gazebo reference="imu_link">
             <material>Gazebo/Red</material>
@@ -30,7 +29,6 @@
         </gazebo>
     </xacro:macro>
 
-
     <gazebo>
         <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
             <robotNamespace>/</robotNamespace>
@@ -38,6 +36,7 @@
             <legacyModeNS>true</legacyModeNS>
         </plugin>
     </gazebo>
+    
 </robot>
 
 

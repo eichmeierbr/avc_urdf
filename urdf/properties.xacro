@@ -8,7 +8,6 @@
     <xacro:property name="chassisW" value="0.2" />
     <xacro:property name="chassisH" value="0.15" />
 
-
     <xacro:property name="chassisMass" value="1"/>
     <xacro:property name="chassisIxx" value="0.4"/>
     <xacro:property name="chassisIxy" value="0.4"/>
@@ -22,8 +21,6 @@
     <xacro:property name="chassisMeshXoffset" value="-0.125"/>
     <xacro:property name="chassisMeshYoffset" value="-0.070"/>
     <xacro:property name="chassisMeshZoffset" value="-0.085"/>
-
-
 
     <!-- ______________Wheel parameters__________________________ -->
     <!-- Wheel Rotation Limits> -->
@@ -43,8 +40,6 @@
     <xacro:property name="wheelMeshYoffset" value="0.022"/>
     <xacro:property name="wheelMeshYoffsetLeft" value="-0.022"/>
     <xacro:property name="wheelMeshZoffset" value="0"/>
-
-
 
     <!-- Wheel Physical Propreties-->
     <xacro:property name="wheelThickness" value="0.043" />
@@ -66,9 +61,7 @@
     <xacro:property name="wheelKp" value="10000000.0"/>
     <xacro:property name="wheelKd" value="1.0"/>
 
-
-
- <!-- ______________IMU parameters__________________________ -->
+    <!-- ______________IMU parameters__________________________ -->
     <xacro:property name="imuL" value="0.064" />
     <xacro:property name="imuW" value="0.028" />
     <xacro:property name="imuH" value="0.007" />
@@ -85,8 +78,7 @@
     <xacro:property name="imuYoffset" value="0.0"/>
     <xacro:property name="imuZoffset" value="0.077"/>
 
-
-<!-- __________________Random Values______________________ -->
+    <!-- __________________Random Values______________________ -->
     <xacro:property name="width" value="0.2" />
     <xacro:property name="leglen" value="0.6" />
     <xacro:property name="polelen" value="0.2" />
@@ -96,9 +88,7 @@
     <xacro:property name="pi" value="3.1415" />
     <xacro:property name="seperationWheelDist" value=".1215" />
 
-
-
-     <!-- ______________Lidar parameters__________________________ -->
+    <!-- ______________Lidar parameters__________________________ -->
     <xacro:property name="lidarThick" value="0.086" />
     <xacro:property name="lidarRadius" value="0.045" />
 
