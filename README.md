@@ -3,6 +3,7 @@
 ## Downloading using rosinstall
 
 ```
+$ cd <catkin_ws>/src
 $ rosinstall . avc.rosinstall
 ```
 
