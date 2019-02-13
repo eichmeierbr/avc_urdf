@@ -68,5 +68,5 @@ The lidar is fixed to the top frame. It is modeled using a blue cylinder.
 
 The lidar joint is fixed.
 
-![This is a pic of the robot](https://github.com/eichmeierbr/avc_urdf/real_robot.jpg)
+![This is a pic of the robot](https://github.com/eichmeierbr/avc_urdf/blob/master/real_robot.jpg)
 
