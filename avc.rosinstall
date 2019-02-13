@@ -1,0 +1,4 @@
+# main repo
+- git: {local-name: avc_urdf, 
+        uri: 'https://github.com/eichmeierbr/avc_urdf.git',
+        version: master}
