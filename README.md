@@ -29,6 +29,23 @@ Display with gazebo
 $ roslaunch avc_urdf gazebo.launch
 ```
 
+If running melodic, you must go into the urdf folder
+
+```
+$ cd avc_urdf/urdf
+```
+Then through your favorite editor go into links.xacro and change line 14 to only have two // on the mesh url
+
+```
+<mesh filename="file://$(find avc_urdf)/meshes/chassis2.DAE" scale="${chassisScale} ${chassisScale} ${chassisScale}"/>
+```
+and then again in geometries.xacro on lines 7, and 27 remove one of the / on the mesh urls so that there are only two.
+
+```
+7  <mesh filename="file://$(find avc_urdf)/meshes/chassis2.DAE" scale="${chassisScale} ${chassisScale} ${chassisScale}"/>
+14 <mesh filename="file://$(find avc_urdf)/meshes/chassis2.DAE" scale="${chassisScale} ${chassisScale} ${chassisScale}"/>
+```
+
 ## Robot Description
 
 The four components of the robot are the frame, wheels, imu, and lidar.
