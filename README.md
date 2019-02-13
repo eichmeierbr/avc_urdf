@@ -1,5 +1,11 @@
 # USU AVC URDF
 
+## Downloading using rosinstall
+
+```
+$ rosinstall . avc.rosinstall
+```
+
 ## How to execute code:
 
 ### Run launch file with either gazebo or rviz
