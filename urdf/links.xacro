@@ -1,28 +1,29 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="mintaur">
 
-	<xacro:include filename="$(find avc_urdf)/urdf/inertial.xacro" />
-	<xacro:include filename="$(find avc_urdf)/urdf/joints.xacro" />
-	<xacro:include filename="$(find avc_urdf)/urdf/transmissions.xacro" />
+  <xacro:include filename="$(find avc_urdf)/urdf/inertial.xacro" />
+  <xacro:include filename="$(find avc_urdf)/urdf/joints.xacro" />
+  <xacro:include filename="$(find avc_urdf)/urdf/transmissions.xacro" />
   <xacro:include filename="$(find avc_urdf)/urdf/geometries.xacro" />
 
 
-<xacro:macro name="base_link">
- <link name="base_link">
-    <visual>
-      <geometry>
-        <mesh filename="file:///$(find avc_urdf)/meshes/chassis2.DAE" scale="${chassisScale} ${chassisScale} ${chassisScale}"/>
-      </geometry>
-      <origin rpy="1.57 0 0" xyz="${chassisMeshXoffset} ${chassisMeshYoffset} ${chassisMeshZoffset}" />
-    </visual>
-    <collision>
-      <geometry>
-        <box size = "${chassisL} ${chassisW} ${chassisH} "/>
-      </geometry>
-    </collision>
-    <xacro:default_inertial mass="10"/>
-  </link>
-</xacro:macro>
+  <xacro:macro name="base_link">
+    <link name="base_link">
+      <visual>
+        <geometry>
+          <mesh filename="file:///$(find avc_urdf)/meshes/chassis2.DAE" scale="${chassisScale} ${chassisScale} ${chassisScale}"/>
+        </geometry>
+        <origin rpy="1.57 0 0" xyz="${chassisMeshXoffset} ${chassisMeshYoffset} ${chassisMeshZoffset}" />
+      </visual>
+      <collision>
+        <geometry>
+          <box size = "${chassisL} ${chassisW} ${chassisH} "/>
+        </geometry>
+      </collision>
+      <xacro:default_inertial mass="10"/>
+    </link>
+    <xacro:base_gazebo/>
+  </xacro:macro>
 
 
   <xacro:macro name="wheel" params="prefix suffix fb lr">
@@ -52,36 +53,36 @@
   </xacro:macro>
 
 
-<xacro:macro name="imu">
+  <xacro:macro name="imu">
     <link name="imu_link">
-        <visual>
-            <xacro:imu_geometry />
-        </visual>
-        <collision>
-            <xacro:imu_geometry />
-        </collision>
-        <xacro:imu_inertial />
+      <visual>
+        <xacro:imu_geometry />
+      </visual>
+      <collision>
+        <xacro:imu_geometry />
+      </collision>
+      <xacro:imu_inertial />
     </link>
     <xacro:imu_joint />
 
-    <!-- <xacro:imu_gazebo /> -->
-</xacro:macro>
+    <xacro:imu_gazebo />
+  </xacro:macro>
 
-<xacro:macro name="lidar">
+  <xacro:macro name="lidar">
     <link name="lidar_link">
-        <visual>
-            <xacro:lidar_geometry />
-            <material name="blue" />
-        </visual>
-        <collision>
-            <xacro:lidar_geometry />
-        </collision>
-        <xacro:lidar_inertial />
+      <visual>
+        <xacro:lidar_geometry />
+        <material name="blue" />
+      </visual>
+      <collision>
+        <xacro:lidar_geometry />
+      </collision>
+      <xacro:lidar_inertial />
     </link>
     <xacro:lidar_joint />
 
-    <!-- <xacro:lidar_gazebo /> -->
-</xacro:macro>
+    <xacro:lidar_gazebo />
+  </xacro:macro>
 
 
 </robot>
