@@ -75,5 +75,20 @@
     <xacro:imu_joint />
 </xacro:macro> -->
 
+<xacro:macro name="lidar">
+    <link name="lidar_link">
+        <visual>
+            <xacro:lidar_geometry />
+            <!-- <xacro:chassis_mesh_geometry /> -->
+            <material name="grey" />
+        </visual>
+        <collision>
+            <xacro:lidar_geometry />
+        </collision>
+        <xacro:lidar_inertial />
+    </link>
+
+    <xacro:lidar_joint />
+</xacro:macro>
 
 </robot>

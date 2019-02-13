@@ -12,8 +12,8 @@
 
 	<xacro:macro name="wheel_inertial">
 		<inertial>
-            <mass value="${wheelMass}"/>
-            <inertia ixx="${wheelIxx}" ixy="${wheelIxy}" ixz="${wheelIxz}" iyy="${wheelIyy}" iyz="${wheelIyz}" izz="${wheelIzz}"/>
+            	<mass value="${wheelMass}"/>
+            	<inertia ixx="${wheelIxx}" ixy="${wheelIxy}" ixz="${wheelIxz}" iyy="${wheelIyy}" iyz="${wheelIyz}" izz="${wheelIzz}"/>
 		</inertial>
 	</xacro:macro>
 
@@ -31,5 +31,11 @@
         </inertial>
 	</xacro:macro>
 
+	<xacro:macro name="lidar_inertial">
+		<inertial>
+            	<mass value="${lidarMass}"/>
+            	<inertia ixx="${lidarIxx}" ixy="${lidarIxy}" ixz="${lidarIxz}" iyy="${lidarIyy}" iyz="${lidarIyz}" izz="${lidarIzz}"/>
+		</inertial>
+	</xacro:macro>
 
 </robot>

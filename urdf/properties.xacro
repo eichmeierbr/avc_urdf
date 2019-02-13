@@ -81,5 +81,17 @@
     <xacro:property name="imuIyz" value="0.4"/>
     <xacro:property name="imuIzz" value="0.4"/> -->
 
+ <!-- ______________Lidar parameters__________________________ -->
+    <xacro:property name="lidarThick" value="0.086" />
+    <xacro:property name="lidarRadius" value="0.045" />
+
+    <xacro:property name="lidarMass" value="0.025"/>
+    <xacro:property name="lidarIxx" value="0.08333333*lidarMass*((3*(lidarRadius*lidarRadius))+(lidarThick*lidarThick))"/>
+    <xacro:property name="lidarIxy" value="0.0"/>
+    <xacro:property name="lidarIyy" value="0.08333333*lidarMass*((3*(lidarRadius*lidarRadius))+(lidarThick*lidarThick))"/>
+    <xacro:property name="lidarIxz" value="0.0"/>
+    <xacro:property name="lidarIyz" value="0.0"/>
+    <xacro:property name="lidarIzz" value="0.5*lidarMass*(lidarRadius*lidarRadius)"/>
+
 
 </robot>

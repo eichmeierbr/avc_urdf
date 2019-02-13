@@ -4,7 +4,7 @@
 
     <xacro:macro name="chassis_mesh_geometry">
         <geometry>
-            <mesh filename="file:///$(find avc_urdf)/meshes/chassis2.DAE" scale="${chassisScale} ${chassisScale} ${chassisScale}"/>
+            <mesh filename='file://$(find avc_urdf)/meshes/chassis2.DAE' scale="${chassisScale} ${chassisScale} ${chassisScale}"/>
          </geometry>
          <origin rpy="1.57 0 0" xyz="${chassisMeshXoffset} ${chassisMeshYoffset} ${chassisMeshZoffset}" />
 	</xacro:macro>
@@ -24,7 +24,7 @@
 
     <xacro:macro name="wheel_mesh_geometry" params="side">
         <geometry>
-            <mesh filename="file:///$(find avc_urdf)/meshes/wheels.DAE" scale="${wheelScale} ${wheelScale} ${wheelScale}"/>
+            <mesh filename='file://$(find avc_urdf)/meshes/wheels.DAE' scale="${wheelScale} ${wheelScale} ${wheelScale}"/>
          </geometry>
             <xacro:if value="${side =='right'}">
                 <origin rpy="1.57 0 0" xyz="0 ${wheelMeshYoffset} 0" />
@@ -41,6 +41,13 @@
             <cylinder length="${wheelThickness}" radius="${wheelRadius}"/>
         </geometry>
         <origin rpy="1.57075 0 0" xyz="0 0 0"/>
+	</xacro:macro>
+
+    <xacro:macro name="lidar_geometry">
+        <geometry>
+            <cylinder length="${lidarThick}" radius="${lidarRadius}"/>
+        </geometry>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
 	</xacro:macro>
 
 </robot>
