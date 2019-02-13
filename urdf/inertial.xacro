@@ -23,13 +23,6 @@
 		</inertial>
 	</xacro:macro>
 
-	<!-- <xacro:macro name="imu_inertial">
-		<inertial>
-            <mass value="${imuMass}"/>
-            <inertia ixx="${imuIxx}" ixy="${imuIxy}" ixz="${imuIxz}" iyy="${imuIyy}" iyz="${imuIyz}" izz="${imuIzz}"/>
-		</inertial>
-	</xacro:macro> -->
-
 	<xacro:macro name="axle_inertial">
 		<inertial>
 			<mass value="0.001"/>
@@ -37,5 +30,19 @@
 		</inertial>
 	</xacro:macro>
 
+
+	<xacro:macro name="imu_inertial">
+		<inertial>
+            <mass value="${imuMass}"/>
+            <inertia ixx="${imuIxx}" ixy="${imuIxy}" ixz="${imuIxz}" iyy="${imuIyy}" iyz="${imuIyz}" izz="${imuIzz}"/>
+		</inertial>
+	</xacro:macro>
+
+	<xacro:macro name="lidar_inertial">
+		<inertial>
+            	<mass value="${lidarMass}"/>
+            	<inertia ixx="${lidarIxx}" ixy="${lidarIxy}" ixz="${lidarIxz}" iyy="${lidarIyy}" iyz="${lidarIyz}" izz="${lidarIzz}"/>
+		</inertial>
+	</xacro:macro>
 
 </robot>

@@ -1,15 +1,35 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="mintaur">
 
-    <xacro:macro name="wheel_gazebo" params="side fob">
-        <gazebo reference="${side}_${fob}_wheel">
-            <mu1 value="${wheelMu1}"/>
-            <mu2 value="{wheelMu2}"/>
-            <kp value="{wheelKp}" />
-            <kd value="{wheelKd}" />
-            <material>Gazebo/Grey</material>
+    <xacro:macro name="wheel_gazebo" params="prefix suffix">
+        <gazebo reference="${prefix}_${suffix}_wheel">
+        <mu1 value="200.0"/>
+        <mu2 value="100.0"/>
+        <kp value="10000000.0" />
+        <kd value="1.0" />
+        <material>Gazebo/Grey</material>
         </gazebo>
     </xacro:macro>
+
+
+    <!-- <xacro:macro name="imu_gazebo">
+        <gazebo reference="imu">
+        <material>Gazebo/Red</material>
+        </gazebo>
+    </xacro:macro>
+
+    <xacro:macro name="lidar_gazebo">
+        <gazebo reference="lidar">
+        <visual>
+              <material>
+                <ambient>1.0 1.0 1.0 1.0</ambient>
+                <diffuse>1.0 1.0 1.0 1.0</diffuse>
+                <specular>1.0 1.0 1.0 1.0</specular>
+                <emissive>1.0 1.0 1.0 1.0</emissive>
+             </material>
+        </visual>
+        </gazebo>
+    </xacro:macro> -->
 
 
     <gazebo>

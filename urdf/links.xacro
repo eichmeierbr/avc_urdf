@@ -4,7 +4,7 @@
 	<xacro:include filename="$(find avc_urdf)/urdf/inertial.xacro" />
 	<xacro:include filename="$(find avc_urdf)/urdf/joints.xacro" />
 	<xacro:include filename="$(find avc_urdf)/urdf/transmissions.xacro" />
-    <xacro:include filename="$(find avc_urdf)/urdf/geometries.xacro" />
+  <xacro:include filename="$(find avc_urdf)/urdf/geometries.xacro" />
 
 
 <xacro:macro name="base_link">
@@ -35,53 +35,53 @@
       <collision>
         <xacro:wheel_geometry />
       </collision>
-      <xacro:default_inertial mass="1"/>
+      <xacro:wheel_inertial />
     </link>
 
-    <joint name="${prefix}_${suffix}_wheel_joint" type="continuous">
-      <axis xyz="0 1 0" rpy="0 0 0" />
-      <parent link="base_link"/>
-      <child link="${prefix}_${suffix}_wheel"/>
-      <origin xyz="${fb} ${lr} -${wheeldiam/2+.05}" rpy="0 0 0"/>
-    </joint>
+
+    <xacro:wheel_move_joint prefix="${prefix}" suffix="${suffix}" fb="${fb}" lr="${lr}" />
 
     <!-- This block provides the simulator (Gazebo) with information on a few additional
     physical properties. See http://gazebosim.org/tutorials/?tut=ros_urdf for more-->
-    <gazebo reference="${prefix}_${suffix}_wheel">
-      <mu1 value="200.0"/>
-      <mu2 value="100.0"/>
-      <kp value="10000000.0" />
-      <kd value="1.0" />
-      <material>Gazebo/Grey</material>
-    </gazebo>
+    <xacro:wheel_gazebo prefix="${prefix}" suffix="${suffix}" />
 
     <!-- This block connects the wheel joint to an actuator (motor), which informs both
     simulation and visualization of the robot -->
-    <transmission name="${prefix}_${suffix}_wheel_trans">
-      <type>transmission_interface/SimpleTransmission</type>
-      <actuator name="${prefix}_${suffix}_wheel_motor">
-        <mechanicalReduction>1</mechanicalReduction>
-      </actuator>
-      <joint name="${prefix}_${suffix}_wheel_joint">
-        <hardwareInterface>VelocityJointInterface</hardwareInterface>
-      </joint>
-    </transmission>
+    <xacro:wheel_transmission prefix="${prefix}" suffix="${suffix}" />
 
   </xacro:macro>
-<!-- <xacro:macro name="imu">
+
+
+<xacro:macro name="imu">
     <link name="imu_link">
         <visual>
             <xacro:imu_geometry />
-            <material name="orange"/>
         </visual>
         <collision>
             <xacro:imu_geometry />
         </collision>
         <xacro:imu_inertial />
     </link>
-
     <xacro:imu_joint />
-</xacro:macro> -->
+
+    <!-- <xacro:imu_gazebo /> -->
+</xacro:macro>
+
+<xacro:macro name="lidar">
+    <link name="lidar_link">
+        <visual>
+            <xacro:lidar_geometry />
+            <material name="blue" />
+        </visual>
+        <collision>
+            <xacro:lidar_geometry />
+        </collision>
+        <xacro:lidar_inertial />
+    </link>
+    <xacro:lidar_joint />
+
+    <!-- <xacro:lidar_gazebo /> -->
+</xacro:macro>
 
 
 </robot>

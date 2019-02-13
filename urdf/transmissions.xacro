@@ -15,13 +15,13 @@
 	</xacro:macro>
 
 
-    <xacro:macro name="wheel_transmission" params="side fob">
-        <transmission name="${side}_${fob}_wheel_trans">
+    <xacro:macro name="wheel_transmission" params="prefix suffix">
+        <transmission name="${prefix}_${suffix}_wheel_trans">
             <type>transmission_interface/SimpleTransmission</type>
-            <actuator name="${side}_${fob}_wheel_motor">
+            <actuator name="${prefix}_${suffix}_wheel_motor">
                 <mechanicalReduction>1</mechanicalReduction>
             </actuator>
-            <joint name="${side}_${fob}_wheel_joint">
+            <joint name="${prefix}_${suffix}_wheel_joint">
                 <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
             </joint>
         </transmission>

@@ -68,19 +68,25 @@
 
 
 
-    <!-- ______________IMU parameters__________________________ -->
-    <!-- <xacro:property name="imuL" value="0.05" />
-    <xacro:property name="imuW" value="0.05" />
-    <xacro:property name="imuH" value="0.05" />
+ <!-- ______________IMU parameters__________________________ -->
+    <xacro:property name="imuL" value="0.064" />
+    <xacro:property name="imuW" value="0.028" />
+    <xacro:property name="imuH" value="0.007" />
 
-    <xacro:property name="imuMass" value="10"/>
+    <xacro:property name="imuMass" value="0.1"/>
     <xacro:property name="imuIxx" value="0.4"/>
     <xacro:property name="imuIxy" value="0.4"/>
     <xacro:property name="imuIyy" value="0.4"/>
     <xacro:property name="imuIxz" value="0.4"/>
     <xacro:property name="imuIyz" value="0.4"/>
-    <xacro:property name="imuIzz" value="0.4"/> -->
+    <xacro:property name="imuIzz" value="0.4"/>
 
+    <xacro:property name="imuXoffset" value="-0.077"/>
+    <xacro:property name="imuYoffset" value="0.0"/>
+    <xacro:property name="imuZoffset" value="0.077"/>
+
+
+<!-- __________________Random Values______________________ -->
     <xacro:property name="width" value="0.2" />
     <xacro:property name="leglen" value="0.6" />
     <xacro:property name="polelen" value="0.2" />
@@ -89,5 +95,23 @@
     <xacro:property name="wheeldiam" value="0.07" />
     <xacro:property name="pi" value="3.1415" />
     <xacro:property name="seperationWheelDist" value=".1215" />
+
+
+
+     <!-- ______________Lidar parameters__________________________ -->
+    <xacro:property name="lidarThick" value="0.086" />
+    <xacro:property name="lidarRadius" value="0.045" />
+
+    <xacro:property name="lidarXoffset" value="0.076"/>
+    <xacro:property name="lidarYoffset" value="0.0"/>
+    <xacro:property name="lidarZoffset" value="0.059"/>
+
+    <xacro:property name="lidarMass" value="0.025"/>
+    <xacro:property name="lidarIxx" value="${0.08333333*lidarMass*(3*lidarRadius*lidarRadius+lidarThick*lidarThick)}"/>
+    <xacro:property name="lidarIxy" value="0.0"/>
+    <xacro:property name="lidarIyy" value="${0.08333333*lidarMass*(3*lidarRadius*lidarRadius+lidarThick*lidarThick)}"/>
+    <xacro:property name="lidarIxz" value="0.0"/>
+    <xacro:property name="lidarIyz" value="0.0"/>
+    <xacro:property name="lidarIzz" value="${0.5*lidarMass*(lidarRadius*lidarRadius)}"/>
 
 </robot>

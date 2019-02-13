@@ -14,8 +14,8 @@
   <xacro:wheel prefix="left" suffix="back" fb="${backWheelDist}" lr="${seperationWheelDist}"/>
 
 
-  <!-- <xacro:imu /> -->
-  <!-- <xacro:lidar /> TODO -->
+  <xacro:imu />
+  <xacro:lidar /> 
 
 
 
