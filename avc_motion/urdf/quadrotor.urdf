@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+
+<!-- adapted from Daniel Mellinger, Nathan Michael, Vijay Kumar, 
+"Trajectory Generation and Control for Precise Aggressive Maneuvers with Quadrotors" -->
+
+
+<robot name="quadrotor">
+  <link name="/robot1/base_footprint">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://turtlebot_launch/meshes/quadrotor_base.dae" scale=".1 .1 .1"/>
+      </geometry>
+    </visual>   
+  </link>
+
+</robot>
+
+

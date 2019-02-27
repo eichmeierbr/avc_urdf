@@ -1,0 +1,19 @@
+<launch>
+  <arg name="model" default="burger" doc="model type [burger, waffle, waffle_pi]"/>
+  <arg name="namespace" default="/robot1"/>
+
+  <group ns="$(arg namespace)" >
+    <include file="$(find turtlebot_launch)/launch/turtlebot3_rvizSim.launch">
+      <arg name="model" value="$(arg model)" />
+      <arg name="run_rviz" value="false" />
+      <arg name="namespace" value="$(arg namespace)" />
+    </include>
+
+    <include file="$(find turtlebot_launch)/launch/turtlebot3_teleop_key.launch">
+      <arg name="model" value="$(arg model)" />
+    </include>
+  </group>
+
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find turtlebot_launch)/rviz/Turtlebot1.rviz"/>
+
+</launch>

@@ -1,0 +1,29 @@
+<launch>
+  <arg name="model" default="waffle_pi" doc="model type [burger, waffle, waffle_pi]"/>
+  <arg name="namespace" default="/robot2"/>
+
+  <arg name="x_pos" default="7.0"/>
+  <arg name="y_pos" default="-1.0"/>
+  <arg name="z_pos" default=" 0.0"/>
+  <arg name="yaw"   default=" 1.57"/>
+
+  <!-- Create Vehicle -->
+  <group ns="$(arg namespace)" >
+    <include file="$(find turtlebot_launch)/launch/turtlebot3_rvizSim.launch">
+      <arg name="model" value="$(arg model)" />
+      <arg name="namespace" value="$(arg namespace)" />
+      <arg name="spawn_gazebo" value="true" />
+      <arg name="x_pos" value="$(arg x_pos)"/>
+      <arg name="y_pos" value="$(arg y_pos)"/>
+      <arg name="z_pos" value="$(arg z_pos)"/>
+      <arg name="yaw"   value="$(arg yaw)"/>
+    </include>
+
+    <include file="$(find turtlebot_launch)/launch/turtlebot3_teleop_key.launch">
+      <arg name="model" value="$(arg model)" />
+    </include>
+  </group>
+
+
+
+</launch>

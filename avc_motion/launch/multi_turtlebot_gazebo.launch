@@ -1,0 +1,83 @@
+<launch>
+  <!-- General parameters -->
+  <arg name="model" default="waffle_pi" doc="model type [burger, waffle, waffle_pi]"/>
+  <arg name="spawn_gazebo" default="true" />
+
+  <!-- Robot 1 parameters -->
+  <arg name="r1_run" default="true"/>
+  <arg name="r1_namespace" default="/robot1"/>
+  <arg name="r1_x_pos" default="-7.0"/>
+  <arg name="r1_y_pos" default="-1.0"/>
+  <arg name="r1_z_pos" default=" 0.0"/>
+  <arg name="r1_yaw"   default=" 1.57"/>
+
+  <!-- Robot 2 parameters -->
+  <arg name="r2_run" default="true"/>
+  <arg name="r2_namespace" default="/robot2"/>
+  <arg name="r2_x_pos" default="7.0"/>
+  <arg name="r2_y_pos" default="-1.0"/>
+  <arg name="r2_z_pos" default=" 0.0"/>
+  <arg name="r2_yaw"   default=" 1.57"/>
+
+  <!-- Robot 3 parameters -->
+  <arg name="r3_run" default="true"/>
+  <arg name="r3_namespace" default="/robot3"/>
+  <arg name="r3_x_pos" default="0.5"/>
+  <arg name="r3_y_pos" default="3.0"/>
+  <arg name="r3_z_pos" default=" 0.0"/>
+  <arg name="r3_yaw"   default=" 0.0"/>
+
+
+  <!-- Run Robot 1 -->
+  <include file="$(find turtlebot_launch)/launch/turtlebot_gazebo.launch" if="$(arg r1_run)" >
+    <arg name="model" value="$(arg model)" />
+    <arg name="namespace" value="$(arg r1_namespace)" />
+
+    <arg name="run_sim" value="true"/>
+    <arg name="run_rviz" value="false"/>
+    <arg name="spawn_gazebo" value="$(arg spawn_gazebo)" />
+
+    <arg name="x_pos" value="$(arg r1_x_pos)"/>
+    <arg name="y_pos" value="$(arg r1_y_pos)"/>
+    <arg name="z_pos" value="$(arg r1_z_pos)"/>
+    <arg name="yaw"   value="$(arg r1_yaw)"/>
+  </include>
+
+
+  <!-- Run Robot 2 -->
+  <include file="$(find turtlebot_launch)/launch/turtlebot_gazebo.launch" if="$(arg r2_run)" >
+    <arg name="model" value="$(arg model)" />
+    <arg name="namespace" value="$(arg r2_namespace)" />
+
+    <arg name="run_sim" value="false"/>
+    <arg name="run_rviz" value="false"/>
+    <arg name="spawn_gazebo" value="$(arg spawn_gazebo)" />
+
+    <arg name="x_pos" value="$(arg r2_x_pos)"/>
+    <arg name="y_pos" value="$(arg r2_y_pos)"/>
+    <arg name="z_pos" value="$(arg r2_z_pos)"/>
+    <arg name="yaw"   value="$(arg r2_yaw)"/>
+  </include>
+
+  <!-- Run Robot 3 -->
+  <include file="$(find turtlebot_launch)/launch/turtlebot_gazebo.launch" if="$(arg r2_run)" >
+    <arg name="model" value="$(arg model)" />
+    <arg name="namespace" value="$(arg r3_namespace)" />
+
+    <arg name="run_sim" value="false"/>
+    <arg name="run_rviz" value="false"/>
+    <arg name="spawn_gazebo" value="$(arg spawn_gazebo)" />
+
+    <arg name="x_pos" value="$(arg r3_x_pos)"/>
+    <arg name="y_pos" value="$(arg r3_y_pos)"/>
+    <arg name="z_pos" value="$(arg r3_z_pos)"/>
+    <arg name="yaw"   value="$(arg r3_yaw)"/>
+  </include>
+
+
+
+  <!-- Additional Simulation Nodes -->
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find turtlebot_launch)/rviz/Turtlebot_multi.rviz"/>
+
+
+</launch>

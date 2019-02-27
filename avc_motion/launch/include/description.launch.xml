@@ -1,0 +1,7 @@
+<launch>
+  <arg name="model"/>
+  <arg name="robot_tf_prefix" default="robot/" />
+
+  <arg name="urdf_file" default="$(find xacro)/xacro --inorder '$(find avc_motion)/urdf/turtlebot3_$(arg model).urdf.xacro'" />
+  <param name="robot_description" command="$(arg urdf_file) prefix:=$(arg robot_tf_prefix)"/>
+</launch>

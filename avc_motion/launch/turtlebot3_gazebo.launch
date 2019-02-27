@@ -1,0 +1,50 @@
+<launch>
+    <arg name="model" default="waffle_pi" doc="model type [burger, waffle, waffle_pi]"/>
+    <arg name="move_autonomously" default="false"/>
+    <arg name="run_slam" default="true"/>
+    <arg name="teleop" default="false"/>
+
+    <!-- Launch Gazebo: -->
+    <include file="$(find turtlebot3_gazebo)/launch/turtlebot3_house.launch">
+        <arg name="model" value="$(arg model)" />
+    </include>
+
+    <!-- Telep key contents: -->
+    <node pkg="turtlebot3_teleop" type="turtlebot3_teleop_key" name="turtlebot3_teleop_keyboard"  output="screen" if="$(arg teleop)">
+        <param name="model" value="$(arg model)" />
+    </node>
+
+    <!-- Open RVIZ -->
+    <include file="$(find turtlebot3_gazebo)/launch/turtlebot3_gazebo_rviz.launch" unless="$(arg run_slam)">
+        <arg name="model" value="$(arg model)" />
+    </include>
+
+    <!-- Run Simultaneous Robot Localization and Mapping (SLAM) -->
+    <include file="$(find turtlebot3_slam)/launch/turtlebot3_slam.launch" if="$(arg run_slam)">
+        <arg name="model" value="$(arg model)" />
+        <arg name="slam_methods" value="gmapping" />
+        <arg name="open_rviz" value="$(arg teleop)" />
+    </include>
+
+
+    <!-- Run Nodes for moving base -->
+    <group unless="$(arg teleop)" >
+
+       <!-- Map server -->
+       <!--<node pkg="map_server" name="map_server" type="map_server" />   args="$(arg map_file)"/> -->
+
+       <!-- AMCL -->
+       <include file="$(find turtlebot3_navigation)/launch/amcl.launch"/>
+
+       <!-- move_base -->
+       <include file="$(find turtlebot3_navigation)/launch/move_base.launch">
+         <arg name="model" value="$(arg model)" />
+        </include>
+
+       <!-- RVIZ -->
+       <node pkg="rviz" type="rviz" name="rviz" required="true"
+             args="-d $(find turtlebot3_navigation)/rviz/turtlebot3_navigation.rviz"/>
+    </group>
+
+
+</launch>
