@@ -24,6 +24,8 @@ bool Bicycle::init(){
     // Intialize the odometry twist
     linear_velocity_ = 0.0;
     angular_velocity_ = 0.0;
+    linear_accel_ = 0.0;
+    angular_accel_ = 0.0;
     odom_.twist.twist.linear.x = linear_velocity_;
     odom_.twist.twist.linear.y = 0.0;
     odom_.twist.twist.linear.z = 0.0;
@@ -72,21 +74,35 @@ bool Bicycle::update(){
 }
 
 void Bicycle::commandVelocityCallback(const geometry_msgs::TwistConstPtr cmd_vel_msg){
-    linear_velocity_ = cmd_vel_msg->linear.x;
-    double angLimit = M_PI/6;
-    
-    if(cmd_vel_msg->angular.z >= angLimit){
-        angular_velocity_ = angLimit;
-    } else if(cmd_vel_msg->angular.z <= -angLimit){
-        angular_velocity_ = -angLimit;
-    } else {
-        angular_velocity_ = cmd_vel_msg->angular.z;
-    }
+    linear_accel_ = cmd_vel_msg->linear.x;
+    angular_accel_ = cmd_vel_msg->angular.z;
 }
 
 bool Bicycle::updateOdometry(ros::Duration diff_time){
     double dt = diff_time.toSec();
+    double angLimit = M_PI/6;
+    double velLimit = 5;
 
+
+    // Update velocities
+    linear_velocity_ = linear_velocity_ + linear_accel_ * dt;
+    angular_velocity_ = angular_velocity_ + angular_accel_ * dt;    
+
+
+    // Limit vels this 
+    if(linear_velocity_ >= velLimit){
+        linear_velocity_ = velLimit;
+    } else if(linear_velocity_<= -velLimit){
+        linear_velocity_ = -velLimit;
+    }
+
+    if(angular_velocity_ >= angLimit){
+        angular_velocity_ = angLimit;
+    } else if(angular_velocity_<= -angLimit){
+        angular_velocity_ = -angLimit;
+    }
+
+    // Update positions
     // Use Euler integration for updating the odometry
     double ang = linear_velocity_/wheel_sep_*std::tan(angular_velocity_);  
 

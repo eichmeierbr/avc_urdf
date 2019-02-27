@@ -56,9 +56,14 @@ private:
 
     // Variables
     double wheel_sep_;
+
+    double yaw_;
+    double ang_;
     double linear_velocity_;
     double angular_velocity_;
-    double yaw_;
+    double linear_accel_;
+    double angular_accel_;
+
     nav_msgs::Odometry odom_;
     tf::TransformBroadcaster tf_broadcaster_;
 
