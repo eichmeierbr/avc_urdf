@@ -24,7 +24,7 @@
   <node pkg="turtlebot_sim" type="simple_map_tf" name="map_to_odom" output="screen"/>
 
   <!-- Simulate vehicle dynamics -->
-  <node pkg="dynamic_models" type="unicycle_dynamics" name="unicyle_node" output="screen" unless="$(arg spawn_gazebo)">
+  <node pkg="dynamic_models" type="bicycle_dynamics" name="bicyle_node" output="screen" unless="$(arg spawn_gazebo)">
   </node>
 
   <node pkg="turtlebot_sim" type="turtlebot_vehicle" name="turtlebot_vehicle" output="screen" unless="$(arg spawn_gazebo)"/>
