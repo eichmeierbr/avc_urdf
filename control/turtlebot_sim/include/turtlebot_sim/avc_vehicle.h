@@ -33,6 +33,8 @@ namespace avc_sim
 
 #define LEFT                            0
 #define RIGHT                           1
+#define B_LEFT                          2
+#define B_RIGHT                         3
 
 class AVC_vehicle
 {
@@ -55,10 +57,10 @@ private:
     sensor_msgs::JointState joint_states_;
     double wheel_speed_cmd_[2];
 
-    std::string joint_states_name_[2];
+    std::string joint_states_name_[4];
 
-    double last_position_[2];
-    double last_velocity_[2];
+    double last_position_[4];
+    double last_velocity_[4];
 
     double wheel_seperation_;
     double turning_radius_;
