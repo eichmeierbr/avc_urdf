@@ -24,10 +24,7 @@
       <arg name="debug" value="false"/>
     </include>
 
-    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
-    <!-- <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" /> -->
     <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" if="$(arg run_rviz)"/>
-
 
     <!-- Run the keyboard control -->
     <node pkg="turtlebot3_teleop" type="turtlebot3_teleop_key" name="teleop_keyboard" output="screen" unless="$(arg run_joystick)">
