@@ -46,6 +46,8 @@ bool AVC_vehicle::init() {
   // initialize publishers
   joint_states_pub_ =
       nh_.advertise<sensor_msgs::JointState>("joint_states", 100);
+  // initialize subscriber
+  odom_sub_ = nh_.subscribe("odom", 100, &AVC_vehicle::odometryCallback, this);
 
   prev_update_time_ = ros::Time::now();
   return true;

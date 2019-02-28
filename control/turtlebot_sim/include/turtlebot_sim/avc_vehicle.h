@@ -50,6 +50,9 @@ private:
 
     // ROS Topic Publishers
     ros::Publisher joint_states_pub_;
+  
+    // ROS Topic Subscribers
+    ros::Subscriber odom_sub_;
 
     // ROS time for updates
     ros::Time prev_update_time_;
