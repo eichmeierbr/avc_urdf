@@ -33,6 +33,8 @@ namespace turtlebot_sim
 
 #define LEFT                            0
 #define RIGHT                           1
+#define BLEFT                           2
+#define BRIGHT                          3
 
 class AVC_vehicle
 {

@@ -20,7 +20,7 @@
           <box size = "${chassisL} ${chassisW} ${chassisH} "/>
         </geometry>
       </collision>
-      <xacro:default_inertial mass="10"/>
+      <!-- <xacro:default_inertial mass="10"/> -->
     </link>
     <xacro:base_gazebo/>
   </xacro:macro>

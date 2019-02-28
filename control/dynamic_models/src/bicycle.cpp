@@ -34,7 +34,7 @@ bool Bicycle::init(){
     odom_.twist.twist.angular.z = angular_velocity_;
 
     nh_.param("odom_frame", odom_.header.frame_id, std::string("odom"));
-    nh_.param("base_frame", odom_.child_frame_id, std::string("base_footprint"));
+    nh_.param("base_link", odom_.child_frame_id, std::string("base_link"));
 
     double pcov[36] = { 0.1,   0,   0,   0,   0, 0,
                           0, 0.1,   0,   0,   0, 0,

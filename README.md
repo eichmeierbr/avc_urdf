@@ -53,6 +53,8 @@ The four components of the robot are the frame, wheels, imu, and lidar.
 ### Frame
 Description: The frame is the body of the robot where all the other parts are mounted. It is modeled using a 3D mesh of the frame.
 
+The frame is a mesh over the base link.
+
 Where in Code: Instantiated in bvc.xacro line: 9.
 
 
