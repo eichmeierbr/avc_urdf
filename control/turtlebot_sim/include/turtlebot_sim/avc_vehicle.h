@@ -1,5 +1,5 @@
 /*******************************************************************************
-* turtlebot_vehicle.h and turtlebot_vehicle.cpp hav been adapted from turtlebot3_fake.h and turtlebot3_fake.cpp
+* avc_vehicle.h and avc_vehicle.cpp hav been adapted from avc3_fake.h and avc3_fake.cpp
 * See the ROBOTIS copyright below:
 *
 * Copyright 2016 ROBOTIS CO., LTD.
@@ -26,15 +26,13 @@
 #include <sensor_msgs/JointState.h>
 #include <nav_msgs/Odometry.h>
 
-namespace turtlebot_sim
+namespace avc_sim
 {
 
-#define WHEEL_RADIUS                    0.05     // meter
+#define WHEEL_RADIUS                    0.033     // meter
 
 #define LEFT                            0
 #define RIGHT                           1
-#define BLEFT                           2
-#define BRIGHT                          3
 
 class AVC_vehicle
 {
@@ -55,19 +53,21 @@ private:
     ros::Time prev_update_time_;
 
     sensor_msgs::JointState joint_states_;
-    double wheel_speed_cmd_[4];
+    double wheel_speed_cmd_[2];
 
-    std::string joint_states_name_[4];
+    std::string joint_states_name_[2];
 
-    double last_position_[4];
-    double last_velocity_[4];
+    double last_position_[2];
+    double last_velocity_[2];
 
     double wheel_seperation_;
+    double turning_radius_;
+    double robot_radius_;
 
     void updateJoint(ros::Duration diff_time);
     void odometryCallback(const nav_msgs::OdometryConstPtr odom);
 
 };
-} // end namespace turtlebot_sim
+} // end namespace avc_sim
 
 #endif // AVC_VEHICLE_H_
