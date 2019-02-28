@@ -8,8 +8,7 @@
   <arg name="yaw"   default=" 1.57"/>
 
   <param name="odom_frame" value="$(arg namespace)/odom" />
-  <!-- <param name="base_frame" value="$(arg namespace)/base_footprint" /> -->
-  <param name="base_frame" value="$(arg namespace)/base_link" />
+  <param name="base_frame" value="$(arg namespace)/base_footprint" />
 
   <!-- Create the vehicle model for visualization -->
   <include file="$(find avc_motion)/launch/include/avc_description.launch.xml">

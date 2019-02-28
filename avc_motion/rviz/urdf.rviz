@@ -122,6 +122,10 @@ Visualization Manager:
           Value: true
         lidar_link:
           Value: true
+        map:
+          Value: true
+        odom:
+          Value: true
         right_back_wheel:
           Value: true
         right_front_wheel:
@@ -132,27 +136,29 @@ Visualization Manager:
       Show Axes: true
       Show Names: true
       Tree:
-        base_footprint:
-          base_link:
-            imu_link:
-              {}
-            left_back_wheel:
-              {}
-            left_front_wheel:
-              {}
-            lidar_link:
-              {}
-            right_back_wheel:
-              {}
-            right_front_wheel:
-              {}
+        map:
+          odom:
+            base_footprint:
+              base_link:
+                imu_link:
+                  {}
+                left_back_wheel:
+                  {}
+                left_front_wheel:
+                  {}
+                lidar_link:
+                  {}
+                right_back_wheel:
+                  {}
+                right_front_wheel:
+                  {}
       Update Interval: 0
       Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
     Default Light: true
-    Fixed Frame: base_footprint
+    Fixed Frame: odom
     Frame Rate: 30
   Name: root
   Tools:
@@ -173,7 +179,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 0.781625867
+      Distance: 1.24993408
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.0599999987
         Stereo Focal Distance: 1
@@ -188,10 +194,10 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.00999999978
-      Pitch: 0.435397327
+      Pitch: 0.419796467
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 3.52674031
+      Yaw: 1.60991299
     Saved: ~
 Window Geometry:
   Displays:
