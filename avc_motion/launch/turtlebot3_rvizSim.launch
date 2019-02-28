@@ -4,15 +4,14 @@
   <arg name="namespace" default="" />
   <arg name="x_pos" default="-7.0"/>
   <arg name="y_pos" default="-1.0"/>
-  <arg name="z_pos" default=" 0.0"/>
+  <arg name="z_pos" default=" -0.85"/>
   <arg name="yaw"   default=" 1.57"/>
 
   <param name="odom_frame" value="$(arg namespace)/odom" />
   <param name="base_frame" value="$(arg namespace)/base_footprint" />
 
   <!-- Create the vehicle model for visualization -->
-  <include file="$(find avc_motion)/launch/include/description.launch.xml">
-    <arg name="model" value="$(arg model)" />
+  <include file="$(find avc_motion)/launch/include/avc_description.launch.xml">
     <arg name="robot_tf_prefix" value="$(arg namespace)/"/>
   </include>
 
