@@ -29,7 +29,7 @@
 namespace avc_sim
 {
 
-#define WHEEL_RADIUS                    0.033     // meter
+#define WHEEL_RADIUS                    0.05     // meter
 
 #define LEFT                            0
 #define RIGHT                           1
@@ -60,14 +60,10 @@ private:
     sensor_msgs::JointState joint_states_;
     double wheel_speed_cmd_[2];
 
-    std::string joint_states_name_[4];
+    std::string joint_states_name_[6];
 
-    double last_position_[4];
+    double last_position_[6];
     double last_velocity_[4];
-
-    double wheel_seperation_;
-    double turning_radius_;
-    double robot_radius_;
 
     void updateJoint(ros::Duration diff_time);
     void odometryCallback(const nav_msgs::OdometryConstPtr odom);

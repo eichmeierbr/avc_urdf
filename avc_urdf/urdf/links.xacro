@@ -47,6 +47,9 @@
       <xacro:wheel_inertial />
     </link>
 
+    <link name="${prefix}_${suffix}_axle"/>
+
+  	<xacro:axle_joint prefix="${prefix}" suffix="${suffix}" fb="${fb}" lr="${lr}"/>
 
     <xacro:wheel_move_joint prefix="${prefix}" suffix="${suffix}" fb="${fb}" lr="${lr}" />
 
@@ -59,7 +62,6 @@
     <xacro:wheel_transmission prefix="${prefix}" suffix="${suffix}" />
 
   </xacro:macro>
-
 
   <xacro:macro name="imu">
     <link name="imu_link">

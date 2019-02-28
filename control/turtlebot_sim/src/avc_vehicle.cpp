@@ -7,10 +7,6 @@ AVC_vehicle::~AVC_vehicle() {}
 bool AVC_vehicle::init() {
   // initialize ROS parameter
 
-  wheel_seperation_ = 0.287;
-  turning_radius_ = 0.1435;
-  robot_radius_ = 0.220;
-
   nh_.param("wheel_front_left_joint_name", joint_states_name_[LEFT],
             std::string("left_front_wheel_joint"));
   nh_.param("wheel_front_right_joint_name", joint_states_name_[RIGHT],
@@ -18,6 +14,11 @@ bool AVC_vehicle::init() {
   nh_.param("wheel_back_left_joint_name", joint_states_name_[B_LEFT],
             std::string("left_back_wheel_joint"));
   nh_.param("wheel_back_right_joint_name", joint_states_name_[B_RIGHT],
+            std::string("left_back_wheel_joint"));
+
+  nh_.param("axil_front_right_joint_name", joint_states_name_[B_RIGHT],
+            std::string("left_back_wheel_joint"));
+  nh_.param("axil_back_right_joint_name", joint_states_name_[B_RIGHT],
             std::string("right_back_wheel_joint"));
   nh_.param("joint_states_frame", joint_states_.header.frame_id,
             std::string("base_footprint"));

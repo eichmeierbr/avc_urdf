@@ -5,9 +5,9 @@
 	<xacro:macro name="wheel_move_joint" params="prefix suffix fb lr">
         <joint name="${prefix}_${suffix}_wheel_joint" type="continuous">
         <axis xyz="0 1 0" rpy="0 0 0" />
-        <parent link="base_link"/>
+        <parent link="${prefix}_${suffix}_axle"/>
         <child link="${prefix}_${suffix}_wheel"/>
-        <origin xyz="${fb} ${lr} ${-wheeldiam/2-.05}" rpy="0 0 0"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
         </joint>
 	</xacro:macro>
 
@@ -20,17 +20,15 @@
         </joint>
 	</xacro:macro>
 
-
-	<xacro:macro name="axle_joint" params="side fob sideDim fobDim">
-        <joint name="base_to_${side}_${fob}_axle" type="revolute">
+	<xacro:macro name="axle_joint" params="prefix suffix fb lr">
+        <joint name="${prefix}_${suffix}_axle" type="revolute">
             <axis xyz="0 0 1"/>
             <limit effort="${axleEffort}" lower="${llimit}" upper="${ulimit}" velocity="${axleVelocity}"/>
             <parent link="base_link"/>
-            <child link="${side}_${fob}_axle"/>
-            <origin xyz="${fobDim} ${sideDim} ${wheelDrop}" />
+            <child link="${prefix}_${suffix}_axle"/>
+            <origin xyz="${fb} ${lr} ${wheelDrop}" />
         </joint>
 	</xacro:macro>
-
 
 	<xacro:macro name="rear_wheel_joint" params="side fob sideDim fobDim">
         <joint name="${side}_${fob}_wheel_joint" type="continuous">
