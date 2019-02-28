@@ -34,7 +34,7 @@ bool Bicycle::init(){
     odom_.twist.twist.angular.z = angular_velocity_;
 
     nh_.param("odom_frame", odom_.header.frame_id, std::string("odom"));
-    nh_.param("base_link", odom_.child_frame_id, std::string("base_link"));
+    nh_.param("base_frame", odom_.child_frame_id, std::string("base_footprint"));
 
     double pcov[36] = { 0.1,   0,   0,   0,   0, 0,
                           0, 0.1,   0,   0,   0, 0,
@@ -81,7 +81,7 @@ void Bicycle::commandVelocityCallback(const geometry_msgs::TwistConstPtr cmd_vel
 bool Bicycle::updateOdometry(ros::Duration diff_time){
     double dt = diff_time.toSec();
     double angLimit = M_PI/6;
-    double velLimit = 5;
+    double velLimit = 2;
 
 
     // Update velocities
