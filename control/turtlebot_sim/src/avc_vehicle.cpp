@@ -16,10 +16,16 @@ bool AVC_vehicle::init() {
   nh_.param("wheel_back_right_joint_name", joint_states_name_[B_RIGHT],
             std::string("left_back_wheel_joint"));
 
-  nh_.param("axil_front_right_joint_name", joint_states_name_[B_RIGHT],
-            std::string("left_back_wheel_joint"));
-  nh_.param("axil_back_right_joint_name", joint_states_name_[B_RIGHT],
-            std::string("right_back_wheel_joint"));
+  nh_.param("axil_front_right_joint_name", joint_states_name_[4],
+            std::string("$right_front_axle_joint"));
+  nh_.param("axil_front_left_joint_name", joint_states_name_[5],
+            std::string("left_front_axle_joint"));
+  nh_.param("axil_back_right_joint_name", joint_states_name_[6],
+            std::string("$right_back_axle_joint"));
+  nh_.param("axil_back_left_joint_name", joint_states_name_[7],
+            std::string("left_back_axle_joint"));
+
+
   nh_.param("joint_states_frame", joint_states_.header.frame_id,
             std::string("base_footprint"));
 
@@ -31,16 +37,27 @@ bool AVC_vehicle::init() {
   last_velocity_[LEFT] = 0.0;
   last_velocity_[RIGHT] = 0.0;
 
+
   last_position_[B_LEFT] = 0.0;
   last_position_[B_RIGHT] = 0.0;
   last_velocity_[B_LEFT] = 0.0;
   last_velocity_[B_RIGHT] = 0.0;
 
+  last_position_[4] = 0.0;
+  last_position_[5] = 0.0;
+  last_position_[6] = 0.0;
+  last_position_[7] = 0.0;
+
   joint_states_.name.push_back(joint_states_name_[LEFT]);
   joint_states_.name.push_back(joint_states_name_[RIGHT]);
   joint_states_.name.push_back(joint_states_name_[B_LEFT]);
   joint_states_.name.push_back(joint_states_name_[B_RIGHT]);
-  joint_states_.position.resize(4, 0.0);
+  joint_states_.name.push_back(joint_states_name_[4]);
+  joint_states_.name.push_back(joint_states_name_[5]);
+  joint_states_.name.push_back(joint_states_name_[6]);
+  joint_states_.name.push_back(joint_states_name_[7]);
+
+  joint_states_.position.resize(8, 0.0);
   joint_states_.velocity.resize(4, 0.0);
   joint_states_.effort.resize(4, 0.0);
 

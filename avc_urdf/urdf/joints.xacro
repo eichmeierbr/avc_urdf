@@ -21,7 +21,7 @@
 	</xacro:macro>
 
 	<xacro:macro name="axle_joint" params="prefix suffix fb lr">
-        <joint name="${prefix}_${suffix}_axle" type="revolute">
+        <joint name="${prefix}_${suffix}_axle_joint" type="revolute">
             <axis xyz="0 0 1"/>
             <limit effort="${axleEffort}" lower="${llimit}" upper="${ulimit}" velocity="${axleVelocity}"/>
             <parent link="base_link"/>

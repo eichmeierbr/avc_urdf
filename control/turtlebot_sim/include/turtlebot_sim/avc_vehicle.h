@@ -60,9 +60,9 @@ private:
     sensor_msgs::JointState joint_states_;
     double wheel_speed_cmd_[2];
 
-    std::string joint_states_name_[6];
+    std::string joint_states_name_[8];
 
-    double last_position_[6];
+    double last_position_[8];
     double last_velocity_[4];
 
     void updateJoint(ros::Duration diff_time);
