@@ -65,15 +65,13 @@ bool AVC_vehicle::update() {
 
 void AVC_vehicle::updateJoint(ros::Duration diff_time) {
   double wheel_l, wheel_r;  // rotation value of wheel [rad]
-  double delta_s, delta_theta;
   double v[2], w[2];
 
   wheel_l = wheel_r = 0.0;
-  delta_s = delta_theta = 0.0;
 
   v[LEFT] = wheel_speed_cmd_[LEFT];
   w[LEFT] = v[LEFT] / WHEEL_RADIUS;  // w = v / r
-  v[RIGHT] = wheel_speed_cmd_[RIGHT];
+  v[RIGHT] = wheel_speed_cmd_[LEFT];
   w[RIGHT] = v[RIGHT] / WHEEL_RADIUS;
 
   last_velocity_[LEFT] = w[LEFT];
@@ -85,11 +83,11 @@ void AVC_vehicle::updateJoint(ros::Duration diff_time) {
   wheel_r = w[RIGHT] * diff_time.toSec();
 
   if (isnan(wheel_l)) {
-    wheel_l = 0.1;
+    wheel_l = 0.0;
   }
 
   if (isnan(wheel_r)) {
-    wheel_r = 0.1;
+    wheel_r = 0.0;
   }
 
   last_position_[LEFT] += wheel_l;
@@ -113,9 +111,9 @@ void AVC_vehicle::odometryCallback(const nav_msgs::OdometryConstPtr odom) {
   double angular_velocity = odom->twist.twist.angular.z;
 
   wheel_speed_cmd_[LEFT] =
-      linear_velocity - (angular_velocity * wheel_seperation_ / 2);
+      linear_velocity;
   wheel_speed_cmd_[RIGHT] =
-      linear_velocity + (angular_velocity * wheel_seperation_ / 2);
+      angular_velocity;
 }
 
 /*******************************************************************************
