@@ -35,11 +35,11 @@ if os.name == 'nt':
 else:
   import tty, termios
 
-MAX_LIN_VEL = 0.22
-MAX_ANG_VEL = 2.84
+MAX_LIN_accel = 0.5
+MAX_ANG_accel = 2.84
 
-LIN_VEL_STEP_SIZE = 0.01
-ANG_VEL_STEP_SIZE = 0.1
+LIN_accel_STEP_SIZE = 0.01
+ANG_accel_STEP_SIZE = 0.1
 
 msg = """
 Control Your AVC Car!
@@ -49,13 +49,13 @@ Moving around:
    a    s    d
         x
 
-w/x : increase/decrease linear velocity (Max = ####)
-a/d : increase/decrease angular velocity (Max = ####)
+w/x : increase/decrease linear acceleration (Max = %.2f)
+a/d : increase/decrease angular acceleration (Max = %.2f)
 
-space key, s : force stop
+space key, s : reset accelerations
 
 CTRL-C to quit
-"""
+""" %(MAX_LIN_accel, MAX_ANG_accel)
 
 e = """
 Communications Failed
@@ -75,8 +75,8 @@ def getKey():
     termios.tcsetattr(sys.stdin, termios.TCSADRAIN, settings)
     return key
 
-def vels(target_linear_vel, target_angular_vel):
-    return "currently:\tlinear vel %s\t angular vel %s " % (target_linear_vel,target_angular_vel)
+def accels(target_linear_accel, target_angular_accel):
+    return "currently:\tlinear accel %s\t angular accel %s " % (target_linear_accel,target_angular_accel)
 
 def makeSimpleProfile(output, input, slop):
     if input > output:
@@ -98,15 +98,15 @@ def constrain(input, low, high):
 
     return input
 
-def checkLinearLimitVelocity(vel):
-    vel = constrain(vel, - MAX_LIN_VEL,  MAX_LIN_VEL)
+def checkLinearLimitAcceleration(accel):
+    accel = constrain(accel, - MAX_LIN_accel,  MAX_LIN_accel)
 
-    return vel
+    return accel
 
-def checkAngularLimitVelocity(vel):
-    vel = constrain(vel, - MAX_ANG_VEL,  MAX_ANG_VEL)
+def checkAngularLimitAcceleration(accel):
+    accel = constrain(accel, - MAX_ANG_accel,  MAX_ANG_accel)
 
-    return vel
+    return accel
 
 if __name__=="__main__":
     if os.name != 'nt':
@@ -116,37 +116,37 @@ if __name__=="__main__":
     pub = rospy.Publisher('cmd_vel', Twist, queue_size=10)
 
     status = 0
-    target_linear_vel   = 0.0
-    target_angular_vel  = 0.0
-    control_linear_vel  = 0.0
-    control_angular_vel = 0.0
+    target_linear_accel   = 0.0
+    target_angular_accel  = 0.0
+    control_linear_accel  = 0.0
+    control_angular_accel = 0.0
 
     try:
         print msg
         while(1):
             key = getKey()
             if key == 'w' :
-                target_linear_vel = checkLinearLimitVelocity(target_linear_vel + LIN_VEL_STEP_SIZE)
+                target_linear_accel = checkLinearLimitAcceleration(target_linear_accel + LIN_accel_STEP_SIZE)
                 status = status + 1
-                print vels(target_linear_vel,target_angular_vel)
+                print accels(target_linear_accel,target_angular_accel)
             elif key == 'x' :
-                target_linear_vel = checkLinearLimitVelocity(target_linear_vel - LIN_VEL_STEP_SIZE)
+                target_linear_accel = checkLinearLimitAcceleration(target_linear_accel - LIN_accel_STEP_SIZE)
                 status = status + 1
-                print vels(target_linear_vel,target_angular_vel)
+                print accels(target_linear_accel,target_angular_accel)
             elif key == 'a' :
-                target_angular_vel = checkAngularLimitVelocity(target_angular_vel + ANG_VEL_STEP_SIZE)
+                target_angular_accel = checkAngularLimitAcceleration(target_angular_accel + ANG_accel_STEP_SIZE)
                 status = status + 1
-                print vels(target_linear_vel,target_angular_vel)
+                print accels(target_linear_accel,target_angular_accel)
             elif key == 'd' :
-                target_angular_vel = checkAngularLimitVelocity(target_angular_vel - ANG_VEL_STEP_SIZE)
+                target_angular_accel = checkAngularLimitAcceleration(target_angular_accel - ANG_accel_STEP_SIZE)
                 status = status + 1
-                print vels(target_linear_vel,target_angular_vel)
+                print accels(target_linear_accel,target_angular_accel)
             elif key == ' ' or key == 's' :
-                target_linear_vel   = 0.0
-                control_linear_vel  = 0.0
-                target_angular_vel  = 0.0
-                control_angular_vel = 0.0
-                print vels(target_linear_vel, target_angular_vel)
+                target_linear_accel   = 0.0
+                control_linear_accel  = 0.0
+                target_angular_accel  = 0.0
+                control_angular_accel = 0.0
+                print accels(target_linear_accel, target_angular_accel)
             else:
                 if (key == '\x03'):
                     break
@@ -157,11 +157,11 @@ if __name__=="__main__":
 
             twist = Twist()
 
-            control_linear_vel = makeSimpleProfile(control_linear_vel, target_linear_vel, (LIN_VEL_STEP_SIZE/2.0))
-            twist.linear.x = control_linear_vel; twist.linear.y = 0.0; twist.linear.z = 0.0
+            control_linear_accel = makeSimpleProfile(control_linear_accel, target_linear_accel, (LIN_accel_STEP_SIZE/2.0))
+            twist.linear.x = control_linear_accel; twist.linear.y = 0.0; twist.linear.z = 0.0
 
-            control_angular_vel = makeSimpleProfile(control_angular_vel, target_angular_vel, (ANG_VEL_STEP_SIZE/2.0))
-            twist.angular.x = 0.0; twist.angular.y = 0.0; twist.angular.z = control_angular_vel
+            control_angular_accel = makeSimpleProfile(control_angular_accel, target_angular_accel, (ANG_accel_STEP_SIZE/2.0))
+            twist.angular.x = 0.0; twist.angular.y = 0.0; twist.angular.z = control_angular_accel
 
             pub.publish(twist)
 
