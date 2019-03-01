@@ -119,7 +119,7 @@ void AVC_vehicle::updateJoint(ros::Duration diff_time) {
   last_position_[B_LEFT] += wheel_l;
   last_position_[B_RIGHT] += wheel_r;
 
-  last_position_[4] += wheel_rot;
+  last_position_[4] = wheel_rot;
 
   if(last_position_[4] > PI/6){
     last_position_[4] = PI/6;
@@ -144,7 +144,7 @@ void AVC_vehicle::updateJoint(ros::Duration diff_time) {
 
 void AVC_vehicle::odometryCallback(const nav_msgs::OdometryConstPtr odom) {
   double linear_velocity = odom->twist.twist.linear.x;
-  double angular_velocity = odom->twist.twist.angular.z;
+  double angular_velocity = odom->twist.twist.angular.x;
 
   wheel_speed_cmd_[LEFT] =
       linear_velocity;

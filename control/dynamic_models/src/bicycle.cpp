@@ -114,6 +114,7 @@ bool Bicycle::updateOdometry(ros::Duration diff_time){
     // Update the odometry twist
     odom_.twist.twist.linear.x = linear_velocity_;
     odom_.twist.twist.angular.z =  ang;
+    odom_.twist.twist.angular.x =  angular_velocity_;
 
     return true;
 }
