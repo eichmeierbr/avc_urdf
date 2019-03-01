@@ -1,5 +1,7 @@
 #include "turtlebot_sim/avc_vehicle.h"
 
+#define PI 3.14159
+
 using namespace avc_sim;
 
 AVC_vehicle::AVC_vehicle() { init(); }
@@ -14,14 +16,14 @@ bool AVC_vehicle::init() {
   nh_.param("wheel_back_left_joint_name", joint_states_name_[B_LEFT],
             std::string("left_back_wheel_joint"));
   nh_.param("wheel_back_right_joint_name", joint_states_name_[B_RIGHT],
-            std::string("left_back_wheel_joint"));
+            std::string("right_back_wheel_joint"));
 
   nh_.param("axil_front_right_joint_name", joint_states_name_[4],
-            std::string("$right_front_axle_joint"));
+            std::string("right_front_axle_joint"));
   nh_.param("axil_front_left_joint_name", joint_states_name_[5],
             std::string("left_front_axle_joint"));
   nh_.param("axil_back_right_joint_name", joint_states_name_[6],
-            std::string("$right_back_axle_joint"));
+            std::string("right_back_axle_joint"));
   nh_.param("axil_back_left_joint_name", joint_states_name_[7],
             std::string("left_back_axle_joint"));
 
@@ -84,7 +86,7 @@ bool AVC_vehicle::update() {
 }
 
 void AVC_vehicle::updateJoint(ros::Duration diff_time) {
-  double wheel_l, wheel_r;  // rotation value of wheel [rad]
+  double wheel_l, wheel_r, wheel_rot;  // rotation value of wheel [rad]
   double v[2], w[2];
 
   wheel_l = wheel_r = 0.0;
@@ -102,6 +104,8 @@ void AVC_vehicle::updateJoint(ros::Duration diff_time) {
   wheel_l = w[LEFT] * diff_time.toSec();
   wheel_r = w[RIGHT] * diff_time.toSec();
 
+  wheel_rot = wheel_speed_cmd_[RIGHT];
+
   if (isnan(wheel_l)) {
     wheel_l = 0.0;
   }
@@ -115,6 +119,14 @@ void AVC_vehicle::updateJoint(ros::Duration diff_time) {
   last_position_[B_LEFT] += wheel_l;
   last_position_[B_RIGHT] += wheel_r;
 
+  last_position_[4] += wheel_rot;
+
+  if(last_position_[4] > PI/6){
+    last_position_[4] = PI/6;
+  } else if(last_position_[4] < -PI/6){
+    last_position_[4] = -PI/6;
+  }
+
   joint_states_.position[LEFT] = last_position_[LEFT];
   joint_states_.position[RIGHT] = last_position_[RIGHT];
   joint_states_.velocity[LEFT] = last_velocity_[LEFT];
@@ -124,6 +136,10 @@ void AVC_vehicle::updateJoint(ros::Duration diff_time) {
   joint_states_.position[B_RIGHT] = last_position_[B_RIGHT];
   joint_states_.velocity[B_LEFT] = last_velocity_[B_LEFT];
   joint_states_.velocity[B_RIGHT] = last_velocity_[B_RIGHT];
+
+
+  joint_states_.position[4] = last_position_[4];
+  joint_states_.position[5] = last_position_[4];
 }
 
 void AVC_vehicle::odometryCallback(const nav_msgs::OdometryConstPtr odom) {
