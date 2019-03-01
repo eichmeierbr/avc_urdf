@@ -26,9 +26,8 @@
 
     <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" if="$(arg run_rviz)"/>
 
-    <!-- Run the keyboard control -->
-    <node pkg="turtlebot3_teleop" type="turtlebot3_teleop_key" name="teleop_keyboard" output="screen" unless="$(arg run_joystick)">
-      <param name="model" value="$(arg model)" />
+    <!-- Run the keyboard control  MAKE SURE TO RELOCATE THIS-->
+    <node pkg="avc_motion" type="avc_teleop_key" name="teleop_keyboard" output="screen" unless="$(arg run_joystick)">
       <remap from="/cmd_vel" to="$(arg namespace)/cmd_vel" />
     </node>
   </group>
