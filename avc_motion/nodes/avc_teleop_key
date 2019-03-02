@@ -42,7 +42,7 @@ LIN_accel_STEP_SIZE = 0.01
 ANG_accel_STEP_SIZE = 0.1
 
 msg = """
-Control Your AVC Car!
+Control The MINTAUR!!!!
 ---------------------------
 Moving around:
         w

@@ -20,5 +20,4 @@
   <run_depend>rviz</run_depend>
   <run_depend>xacro</run_depend>
   <run_depend>avc_urdf</run_depend>
-
 </package>
