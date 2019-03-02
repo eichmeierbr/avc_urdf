@@ -157,26 +157,26 @@ if __name__=="__main__":
             now = time.time()
             if key == 'w' :
                 target_linear_accel = checkLinearLimitAcceleration(target_linear_accel + LIN_accel_STEP_SIZE)
-                status = status + 1
                 if(now-start > pauseInterval):
+                    status = status + 1
                     print accels(target_linear_accel,target_angular_accel)
                     start = time.time()
             elif key == 's' :
                 target_linear_accel = checkLinearLimitAcceleration(target_linear_accel - LIN_accel_STEP_SIZE)
-                status = status + 1
                 if(now-start > pauseInterval):
+                    status = status + 1
                     print accels(target_linear_accel,target_angular_accel)
                     start = time.time()
             elif key == 'a' :
                 target_angular_accel = checkAngularLimitAcceleration(target_angular_accel + ANG_accel_STEP_SIZE)
-                status = status + 1
                 if(now-start > pauseInterval):
+                    status = status + 1
                     print accels(target_linear_accel,target_angular_accel)
                     start = time.time()
             elif key == 'd' :
                 target_angular_accel = checkAngularLimitAcceleration(target_angular_accel - ANG_accel_STEP_SIZE)
-                status = status + 1
                 if(now-start > pauseInterval):
+                    status = status + 1
                     print accels(target_linear_accel,target_angular_accel)
                     start = time.time()
             elif key == ' ' or key=='':
@@ -192,7 +192,7 @@ if __name__=="__main__":
                     break
 
 
-            if status == 100 :
+            if status == 10 :
                 print msg
                 status = 0
 
