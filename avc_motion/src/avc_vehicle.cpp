@@ -1,4 +1,4 @@
-#include "turtlebot_sim/avc_vehicle.h"
+#include "avc_vehicle.h"
 
 #define PI 3.14159
 
@@ -105,14 +105,6 @@ void AVC_vehicle::updateJoint(ros::Duration diff_time) {
   wheel_r = w[RIGHT] * diff_time.toSec();
 
   wheel_rot = wheel_speed_cmd_[RIGHT];
-
-  if (isnan(wheel_l)) {
-    wheel_l = 0.0;
-  }
-
-  if (isnan(wheel_r)) {
-    wheel_r = 0.0;
-  }
 
   last_position_[LEFT] += wheel_l;
   last_position_[RIGHT] += wheel_r;

@@ -36,10 +36,10 @@ else:
   import tty, termios
 
 MAX_LIN_accel = 0.5
-MAX_ANG_accel = 2.84
+MAX_ANG_accel = 0.3
 
 LIN_accel_STEP_SIZE = 0.01
-ANG_accel_STEP_SIZE = 0.1
+ANG_accel_STEP_SIZE = 0.05
 
 msg = """
 Control The MINTAUR!!!!
