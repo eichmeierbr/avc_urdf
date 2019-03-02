@@ -20,13 +20,13 @@
   </node>
 
   <!-- Create mapping from odom frame to map frame" -->
-  <node pkg="turtlebot_sim" type="simple_map_tf" name="map_to_odom" output="screen"/>
+  <node pkg="avc_motion" type="simple_map_tf" name="map_to_odom" output="screen"/>
 
   <!-- Simulate vehicle dynamics -->
-  <node pkg="dynamic_models" type="bicycle_dynamics" name="bicyle_node" output="screen" unless="$(arg spawn_gazebo)">
+  <node pkg="avc_motion" type="bicycle_dynamics" name="bicyle_node" output="screen" unless="$(arg spawn_gazebo)">
   </node>
 
-  <node pkg="turtlebot_sim" type="avc_vehicle" name="avc_vehicle_node" output="screen" unless="$(arg spawn_gazebo)"/>
+  <node pkg="avc_motion" type="avc_vehicle" name="avc_vehicle_node" output="screen" unless="$(arg spawn_gazebo)"/>
 
   <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-urdf -model $(arg namespace) -x
     $(arg x_pos) -y $(arg y_pos) -z $(arg z_pos) -Y $(arg yaw)

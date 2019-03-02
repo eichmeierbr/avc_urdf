@@ -29,7 +29,7 @@
 
 import rospy
 from geometry_msgs.msg import Twist
-import sys, select, os
+import sys, select, os, time
 if os.name == 'nt':
   import msvcrt
 else:
@@ -38,8 +38,8 @@ else:
 MAX_LIN_accel = 0.5
 MAX_ANG_accel = 0.3
 
-LIN_accel_STEP_SIZE = 0.01
-ANG_accel_STEP_SIZE = 0.05
+LIN_accel_STEP_SIZE = 0.5
+ANG_accel_STEP_SIZE = 0.3
 
 msg = """
 Control The MINTAUR!!!!
@@ -47,12 +47,12 @@ Control The MINTAUR!!!!
 Moving around:
         w
    a    s    d
-        x
+        
 
-w/x : increase/decrease linear acceleration (Max = %.2f)
-a/d : increase/decrease angular acceleration (Max = %.2f)
+w/s : linear acceleration at (Max = %.2f)
+a/d : angular acceleration at (Max = %.2f)
 
-space key, s : reset accelerations
+
 
 CTRL-C to quit
 """ %(MAX_LIN_accel, MAX_ANG_accel)
@@ -108,12 +108,39 @@ def checkAngularLimitAcceleration(accel):
 
     return accel
 
+# def controllerBackup():
+#     if key == 'w' :
+#         target_linear_accel = checkLinearLimitAcceleration(target_linear_accel + LIN_accel_STEP_SIZE)
+#         status = status + 1
+#         print accels(target_linear_accel,target_angular_accel)
+#     elif key == 'x' :
+#         target_linear_accel = checkLinearLimitAcceleration(target_linear_accel - LIN_accel_STEP_SIZE)
+#         status = status + 1
+#         print accels(target_linear_accel,target_angular_accel)
+#     elif key == 'a' :
+#         target_angular_accel = checkAngularLimitAcceleration(target_angular_accel + ANG_accel_STEP_SIZE)
+#         status = status + 1
+#         print accels(target_linear_accel,target_angular_accel)
+#     elif key == 'd' :
+#         target_angular_accel = checkAngularLimitAcceleration(target_angular_accel - ANG_accel_STEP_SIZE)
+#         status = status + 1
+#         print accels(target_linear_accel,target_angular_accel)
+#     elif key == ' ' or key == 's' :
+#         target_linear_accel   = 0.0
+#         control_linear_accel  = 0.0
+#         target_angular_accel  = 0.0
+#         control_angular_accel = 0.0
+#         print accels(target_linear_accel, target_angular_accel)
+#     else:
+#         if (key == '\x03'):
+#             break
+
 if __name__=="__main__":
     if os.name != 'nt':
         settings = termios.tcgetattr(sys.stdin)
 
     rospy.init_node('avc_teleop')
-    pub = rospy.Publisher('cmd_vel', Twist, queue_size=10)
+    pub = rospy.Publisher('cmd_accel', Twist, queue_size=10)
 
     status = 0
     target_linear_accel   = 0.0
@@ -123,35 +150,49 @@ if __name__=="__main__":
 
     try:
         print msg
+        start = time.time()
+        pauseInterval = 1
         while(1):
             key = getKey()
+            now = time.time()
             if key == 'w' :
                 target_linear_accel = checkLinearLimitAcceleration(target_linear_accel + LIN_accel_STEP_SIZE)
                 status = status + 1
-                print accels(target_linear_accel,target_angular_accel)
-            elif key == 'x' :
+                if(now-start > pauseInterval):
+                    print accels(target_linear_accel,target_angular_accel)
+                    start = time.time()
+            elif key == 's' :
                 target_linear_accel = checkLinearLimitAcceleration(target_linear_accel - LIN_accel_STEP_SIZE)
                 status = status + 1
-                print accels(target_linear_accel,target_angular_accel)
+                if(now-start > pauseInterval):
+                    print accels(target_linear_accel,target_angular_accel)
+                    start = time.time()
             elif key == 'a' :
                 target_angular_accel = checkAngularLimitAcceleration(target_angular_accel + ANG_accel_STEP_SIZE)
                 status = status + 1
-                print accels(target_linear_accel,target_angular_accel)
+                if(now-start > pauseInterval):
+                    print accels(target_linear_accel,target_angular_accel)
+                    start = time.time()
             elif key == 'd' :
                 target_angular_accel = checkAngularLimitAcceleration(target_angular_accel - ANG_accel_STEP_SIZE)
                 status = status + 1
-                print accels(target_linear_accel,target_angular_accel)
-            elif key == ' ' or key == 's' :
+                if(now-start > pauseInterval):
+                    print accels(target_linear_accel,target_angular_accel)
+                    start = time.time()
+            elif key == ' ' or key=='':
                 target_linear_accel   = 0.0
                 control_linear_accel  = 0.0
                 target_angular_accel  = 0.0
                 control_angular_accel = 0.0
-                print accels(target_linear_accel, target_angular_accel)
+                if(now-start > pauseInterval):
+                    print accels(target_linear_accel,target_angular_accel)
+                    start = time.time()
             else:
                 if (key == '\x03'):
                     break
 
-            if status == 20 :
+
+            if status == 100 :
                 print msg
                 status = 0
 
@@ -164,6 +205,8 @@ if __name__=="__main__":
             twist.angular.x = 0.0; twist.angular.y = 0.0; twist.angular.z = control_angular_accel
 
             pub.publish(twist)
+
+            
 
     except:
         print e

@@ -49,7 +49,7 @@ bool Bicycle::init(){
     odom_pub_         = nh_.advertise<nav_msgs::Odometry>("odom", 100);
 
     // initialize subscribers
-    cmd_vel_sub_  = nh_.subscribe("cmd_vel", 100,  &Bicycle::commandVelocityCallback, this);
+    cmd_vel_sub_  = nh_.subscribe("cmd_accel", 100,  &Bicycle::commandVelocityCallback, this);
 
     prev_update_time_ = ros::Time::now();
     return true;
