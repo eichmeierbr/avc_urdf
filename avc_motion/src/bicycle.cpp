@@ -1,4 +1,4 @@
-#include "dynamic_models/bicycle.h"
+#include "bicycle.h"
 
 using namespace dynamic_models;
 
