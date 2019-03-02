@@ -30,10 +30,10 @@
 import rospy
 from geometry_msgs.msg import Twist
 import sys, select, os, time
-if os.name == 'nt':
-  import msvcrt
+if os.name == 'nt':   # checks if system is on windows or linux
+  import msvcrt       # teleop tools for windows
 else:
-  import tty, termios
+  import tty, termios # teleop tools for linux
 
 MAX_LIN_accel = 0.5
 MAX_ANG_accel = 0.3
@@ -65,17 +65,17 @@ def getKey():
     if os.name == 'nt':
       return msvcrt.getch()
 
-    tty.setraw(sys.stdin.fileno())
-    rlist, _, _ = select.select([sys.stdin], [], [], 0.1)
+    tty.setraw(sys.stdin.fileno())                             # checks flag
+    rlist, _, _ = select.select([sys.stdin], [], [], 0.1)      # checking to see if info for input
     if rlist:
-        key = sys.stdin.read(1)
+        key = sys.stdin.read(1)                                # reads in key press
     else:
         key = ''
 
     termios.tcsetattr(sys.stdin, termios.TCSADRAIN, settings)
     return key
 
-def accels(target_linear_accel, target_angular_accel):
+def accels(target_linear_accel, target_angular_accel): # prints out the target linear and angular acceleration
     return "currently:\tlinear accel %s\t angular accel %s " % (target_linear_accel,target_angular_accel)
 
 def makeSimpleProfile(output, input, slop):
@@ -88,7 +88,7 @@ def makeSimpleProfile(output, input, slop):
 
     return output
 
-def constrain(input, low, high):
+def constrain(input, low, high):    # changes the input to low or high value if input is out of bounds
     if input < low:
       input = low
     elif input > high:
@@ -98,12 +98,12 @@ def constrain(input, low, high):
 
     return input
 
-def checkLinearLimitAcceleration(accel):
+def checkLinearLimitAcceleration(accel): # makes sure the linear acceleration is set in the acceleration bounds
     accel = constrain(accel, - MAX_LIN_accel,  MAX_LIN_accel)
 
     return accel
 
-def checkAngularLimitAcceleration(accel):
+def checkAngularLimitAcceleration(accel): # makes sure the acceleration is set in the 
     accel = constrain(accel, - MAX_ANG_accel,  MAX_ANG_accel)
 
     return accel
@@ -136,7 +136,7 @@ def checkAngularLimitAcceleration(accel):
 #             break
 
 if __name__=="__main__":
-    if os.name != 'nt':
+    if os.name != 'nt':                                     # If system is not Windows, settings are set to Linux for teleopt
         settings = termios.tcgetattr(sys.stdin)
 
     rospy.init_node('avc_teleop')
@@ -150,13 +150,13 @@ if __name__=="__main__":
 
     try:
         print msg
-        start = time.time()
-        pauseInterval = 1
+        start = time.time()     # logs time when function starts
+        pauseInterval = 1       # time till input key is not valid
         while(1):
-            key = getKey()
-            now = time.time()
-            if key == 'w' :
-                target_linear_accel = checkLinearLimitAcceleration(target_linear_accel + LIN_accel_STEP_SIZE)
+            key = getKey()      # gets key press
+            now = time.time()   # logs time after getting key press
+            if key == 'w' :     # w is forward
+                target_linear_accel = checkLinearLimitAcceleration(target_linear_accel + LIN_accel_STEP_SIZE) # sets target linear acceleration
                 if(now-start > pauseInterval):
                     status = status + 1
                     print accels(target_linear_accel,target_angular_accel)
