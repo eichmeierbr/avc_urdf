@@ -10,6 +10,10 @@ $ roslaunch avc_motion proj2_avc.launch
 
 ## Robot Control
 
+To control the robot, use the w,a,s, and d keys for movement. The keys control the acceleration constants of the vehicle with w - forward, a - left turn, s - backwards, d = right turn. If no keys are pressed after the vehicle has started moving, the vehicle with stay in motion as acceleration goes to 0, but the velocity does not change.
+
+## Model Used
+
 We used the continuous-steering car control model to simulate our bot. We chose this model because the two front wheels of our bot twist as modeled by the model presented in LaVelle-Planning Algorithms Section (13.2.4.2). The kinematic equations for this model include:
 
 <a href="https://www.codecogs.com/eqnedit.php?latex=\\&space;Inputs:u_a,u_\alpha\\&space;\dot{x}&space;=&space;v&space;*&space;cos($$\theta$$)\\&space;\dot{y}&space;=&space;v&space;*&space;sin($$\theta$$)\\&space;\dot{\theta}&space;=&space;v/L&space;*&space;tan($$\phi$$)\\&space;\dot{v}&space;=&space;u_a&space;\\&space;\dot{\phi}&space;=&space;$$\omega$$\\&space;\dot{\omega}=&space;u_\alpha" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\\&space;Inputs:u_a,u_\alpha\\&space;\dot{x}&space;=&space;v&space;*&space;cos($$\theta$$)\\&space;\dot{y}&space;=&space;v&space;*&space;sin($$\theta$$)\\&space;\dot{\theta}&space;=&space;v/L&space;*&space;tan($$\phi$$)\\&space;\dot{v}&space;=&space;u_a&space;\\&space;\dot{\phi}&space;=&space;$$\omega$$\\&space;\dot{\omega}=&space;u_\alpha" title="\\ Inputs:u_a,u_\alpha\\ \dot{x} = v * cos($$\theta$$)\\ \dot{y} = v * sin($$\theta$$)\\ \dot{\theta} = v/L * tan($$\phi$$)\\ \dot{v} = u_a \\ \dot{\phi} = $$\omega$$\\ \dot{\omega}= u_\alpha" /></a>
