@@ -28,6 +28,10 @@ The robot is controlled by controlling the translational acceleration as well as
 
 ![Simulation](https://github.com/eichmeierbr/avc_urdf/blob/master/sim.png)
 
+## Visual Changes from URDF Project
+
+The only change to the urdf model was the color switch from white to green for asthetic appeal.
+
 ## Help - Melodic Changes
 If running melodic, you must go into the urdf folder
 
