@@ -2,18 +2,10 @@
 
 ## How to execute code:
 
-### Run launch file with either gazebo or rviz
-
-Control with rviz and gazebo
+### Run launch file 
 
 ```
 $ roslaunch avc_motion proj2_avc.launch
-```
-
-Display with rviz
-
-```
-$ roslaunch avc_motion avc_rvizSim.launch
 ```
 
 ## Robot Control
