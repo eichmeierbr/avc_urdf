@@ -10,7 +10,7 @@ $ roslaunch avc_motion proj2_avc.launch
 
 ## Robot Control
 
-To control the robot, use the w,a,s, and d keys for movement. The keys control the acceleration constants of the vehicle with w - forward, a - left turn, s - backwards, d = right turn. If no keys are pressed after the vehicle has started moving, the vehicle with stay in motion as acceleration goes to 0, but the velocity does not change.
+The robot is controlled by controlling the translational acceleration as well as steering angle acceleration. This is done through keyboard input. Positive and negative linear acceleration is controlled using 'w' and 's' respectively. Positive and negative angular rotation around the z-axis is controlled with 'a' and 'd' respectively. Pressing an input button sends an acceleration value according to avc_teleop_key lines 38-39. When no input is being recieved zero acceleration is being commanded.
 
 ## Model Used
 
@@ -20,11 +20,9 @@ We used the continuous-steering car control model to simulate our bot. We chose 
 
 We implemented the code by taking the unicycle model that was provided us and turning it into a simple bicycle model by changing how angular velocity is being computed (bicycle.cpp line 107). Then we made it into a smooth bicycle by adding translational acceleration and angular acceleration as states (bicycle.h lines 64-65) and updating the model states using the commanded acceleration (bicycle.cpp lines 88-103).
 
-Then we had to import the URDF from our other miniproject (avc_description.launch.xml and avc_rvizSim.launch line 14). We also made it so that the wheels spin acording to the change in odometry.
+Then we had to import the URDF from our other miniproject (avc_description.launch.xml and avc_rvizSim.launch line 14). We also made it so that the wheels spin according to the change in odometry.
 
 We made changes to the original URDF so the the wheels could twist like they do in real life, the previous mini-project had implemented a simple differential drive model. We put in the steering angle limits as well as velocity limits to match those of the actual vehicle. We had to change the base_link frame so that we could control the robot between the back wheels rather than the center of mass based on the maths of the control model.
-
-The robot is controlled by controlling the translational acceleration as well as steering angle acceleration. This is done through keyboard input. Positive and negative linear acceleration is controlled using 'w' and 's' respectively. Positive and negative angular rotation around the z-axis is controlled with 'a' and 'd' respectively. Pressing an input button sends an aceleration value according to avc_teleop_key lines 38-39. When no input is being recieved zero acceleration is being commanded.
 
 ![Simulation](https://github.com/eichmeierbr/avc_urdf/blob/master/sim.png)
 
