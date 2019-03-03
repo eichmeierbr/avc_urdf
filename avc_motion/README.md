@@ -10,9 +10,14 @@ $ roslaunch avc_motion proj2_avc.launch
 
 ## Robot Control
 
-We used the better bicycle control model to simulate our bot. This is because the two front wheels of our bot twist.
+We used the continuous-steering car control model to simulate our bot. We chose this model because the two front wheels of our bot twist as modeled by the model presented in LaVelle-Planning Algorithms Section (13.2.4.2). The kinematic equations for this model include:
+x_dot = v * cos($$\theta$$)
+y_dot = v * sin($$\theta$$)
+theta_dot = v/L * tan($$\phi$$)
+phi_dot = $$\omega$$
+omega_dot = u_alpha
 
-We implemented the code by taking the unicycle model that was provided us and turning it into a simple bicycle model by changing how angular velocity is being computed. Then we made it into a smooth bicycle by adding translational velocity and angular velocity as states.
+We implemented the code by taking the unicycle model that was provided us and turning it into a simple bicycle model by changing how angular velocity is being computed. Then we made it into a smooth bicycle by adding translational velocity and angular velocity as states and updating the model states using the commanded acceleration.
 
 Then we had to import the URDF from our other miniproject. We also made it so that the wheels spin acording to the change in odometry.
 
