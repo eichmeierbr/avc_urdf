@@ -22,13 +22,11 @@ We implemented the code by taking the unicycle model that was provided us and tu
 
 Then we had to import the URDF from our other miniproject (avc_description.launch.xml and avc_rvizSim.launch line 14). We also made it so that the wheels spin according to the change in odometry.
 
+## Visual Changes from URDF Project
+
 We made changes to the original URDF so the the wheels could twist like they do in real life, the previous mini-project had implemented a simple differential drive model. We put in the steering angle limits as well as velocity limits to match those of the actual vehicle. We had to change the base_link frame so that we could control the robot between the back wheels rather than the center of mass based on the maths of the control model.
 
 ![Simulation](https://github.com/eichmeierbr/avc_urdf/blob/master/sim.png)
-
-## Visual Changes from URDF Project
-
-The only change to the urdf model was the color switch from white to green for asthetic appeal.
 
 ## Help - Melodic Changes
 If running melodic, you must go into the urdf folder
