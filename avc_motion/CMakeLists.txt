@@ -55,14 +55,17 @@ include_directories(
 add_executable(avc_vehicle src/avc_vehicle.cpp)
 add_executable(bicycle_dynamics src/bicycle.cpp)
 add_executable(simple_map_tf src/simple_map_tf.cpp)
+add_executable(list_goal_generator src/list_goal_generator.cpp)
 
 add_dependencies(avc_vehicle ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 add_dependencies(bicycle_dynamics ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 add_dependencies(simple_map_tf ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_dependencies(list_goal_generator ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 target_link_libraries(avc_vehicle ${catkin_LIBRARIES})
 target_link_libraries(bicycle_dynamics ${catkin_LIBRARIES})
 target_link_libraries(simple_map_tf ${catkin_LIBRARIES})
+target_link_libraries(list_goal_generator ${catkin_LIBRARIES})
 
 ################################################################################
 # Install

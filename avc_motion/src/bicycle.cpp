@@ -22,12 +22,12 @@ bool Bicycle::init(){
     wheel_sep_ = 0.3298;
 
     // Init control    
-    k11_ = 2.0039; // Feedback used to calculate linear acceleration input
-    k12_ = 0.2412;
-    k13_ = 0.1608;
-    k21_ = 0.0481; // Feedback used to calculate angular acceleration input
-    k22_ = 3.0000;
-    k23_ = 3.9961;
+    k11_ = 5; // Feedback used to calculate linear acceleration input
+    k12_ = 0.0;
+    k13_ = 0.0;
+    k21_ = 0; // Feedback used to calculate angular acceleration input
+    k22_ = 5;
+    k23_ = 5;
 
     // Intialize the odometry twist
     linear_velocity_ = 0.0;
@@ -88,7 +88,7 @@ void Bicycle::commandVelocityCallback(const geometry_msgs::TwistConstPtr cmd_vel
 bool Bicycle::updateOdometry(ros::Duration diff_time){
     double dt = diff_time.toSec();
     double angLimit = M_PI/6;
-    double velLimit = 2;
+    double velLimit = 5;
 
     // Calcualte the linear acceleration input
     double u_v = -(k11_*(linear_velocity_-linear_velocity_desired_) 
