@@ -57,12 +57,18 @@ private:
     // Variables
     double wheel_sep_;
 
+    // Control constants
+    double k11_,k12_,k13_,k21_,k22_,k23_;
+
     double yaw_;
-    double ang_;
+    double omega_;
     double linear_velocity_;
-    double angular_velocity_;
-    double linear_accel_;
-    double angular_accel_;
+    double phi_;
+    double phi_dot_;
+
+    double linear_velocity_desired_;
+    double angular_velocity_desired_;
+    double phi_desired_;
 
     nav_msgs::Odometry odom_;
     tf::TransformBroadcaster tf_broadcaster_;
