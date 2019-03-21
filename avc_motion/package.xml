@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>avc_motion</name>
+  <version>0.0.0</version>
+  <description>The motion package for avc</description>
+
+  <maintainer email="eichmeierbr@todo.todo">eichmeierbr</maintainer>
+
+  <license>BSD</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <exec_depend>controller_manager</exec_depend>
+  <exec_depend>diff_drive_controller</exec_depend>
+  <exec_depend>gazebo_ros</exec_depend>
+  <exec_depend>gazebo_ros_control</exec_depend>
+  <exec_depend>joint_state_controller</exec_depend>
+  <exec_depend>position_controllers</exec_depend>
+  <exec_depend>robot_state_publisher</exec_depend>
+  <exec_depend>rqt_robot_steering</exec_depend>
+  <exec_depend>rviz</exec_depend>
+  <exec_depend>xacro</exec_depend>
+  <exec_depend>avc_urdf</exec_depend>
+  <depend>roscpp</depend>
+  <depend>std_msgs</depend>
+  <depend>sensor_msgs</depend>
+  <depend>geometry_msgs</depend>  
+  <depend>rospy</depend>  
+  <depend>tf</depend>  
+
+</package>

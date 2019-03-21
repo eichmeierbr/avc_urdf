@@ -1,0 +1,221 @@
+#!/usr/bin/env python
+
+# Copyright (c) 2011, Willow Garage, Inc.
+# All rights reserved.
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are met:
+#
+#    * Redistributions of source code must retain the above copyright
+#      notice, this list of conditions and the following disclaimer.
+#    * Redistributions in binary form must reproduce the above copyright
+#      notice, this list of conditions and the following disclaimer in the
+#      documentation and/or other materials provided with the distribution.
+#    * Neither the name of the Willow Garage, Inc. nor the names of its
+#      contributors may be used to endorse or promote products derived from
+#       this software without specific prior written permission.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+# AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+# ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+# LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+# CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+# SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+# INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+# CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+# ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+# POSSIBILITY OF SUCH DAMAGE.
+
+import rospy
+from geometry_msgs.msg import Twist
+import sys, select, os, time
+if os.name == 'nt':   # checks if system is on windows or linux
+  import msvcrt       # teleop tools for windows
+else:
+  import tty, termios # teleop tools for linux
+
+MAX_LIN_accel = 0.5
+MAX_ANG_accel = 0.3
+
+LIN_accel_STEP_SIZE = 0.5
+ANG_accel_STEP_SIZE = 0.3
+
+msg = """
+Control The MINTAUR!!!!
+---------------------------
+Moving around:
+        w
+   a    s    d
+        
+
+w/s : linear acceleration at (Max = %.2f)
+a/d : angular acceleration at (Max = %.2f)
+
+
+
+CTRL-C to quit
+""" %(MAX_LIN_accel, MAX_ANG_accel)
+
+e = """
+Communications Failed
+"""
+
+def getKey():
+    if os.name == 'nt':
+      return msvcrt.getch()
+
+    tty.setraw(sys.stdin.fileno())                             # checks flag
+    rlist, _, _ = select.select([sys.stdin], [], [], 0.1)      # checking to see if info for input
+    if rlist:
+        key = sys.stdin.read(1)                                # reads in key press
+    else:
+        key = ''
+
+    termios.tcsetattr(sys.stdin, termios.TCSADRAIN, settings)
+    return key
+
+def accels(target_linear_accel, target_angular_accel): # prints out the target linear and angular acceleration
+    return "currently:\tlinear accel %s\t angular accel %s " % (target_linear_accel,target_angular_accel)
+
+def makeSimpleProfile(output, input, slop):
+    if input > output:
+        output = min( input, output + slop )
+    elif input < output:
+        output = max( input, output - slop )
+    else:
+        output = input
+
+    return output
+
+def constrain(input, low, high):    # changes the input to low or high value if input is out of bounds
+    if input < low:
+      input = low
+    elif input > high:
+      input = high
+    else:
+      input = input
+
+    return input
+
+def checkLinearLimitAcceleration(accel): # makes sure the linear acceleration is set in the acceleration bounds
+    accel = constrain(accel, - MAX_LIN_accel,  MAX_LIN_accel)
+
+    return accel
+
+def checkAngularLimitAcceleration(accel): # makes sure the acceleration is set in the 
+    accel = constrain(accel, - MAX_ANG_accel,  MAX_ANG_accel)
+
+    return accel
+
+# def controllerBackup():
+#     if key == 'w' :
+#         target_linear_accel = checkLinearLimitAcceleration(target_linear_accel + LIN_accel_STEP_SIZE)
+#         status = status + 1
+#         print accels(target_linear_accel,target_angular_accel)
+#     elif key == 'x' :
+#         target_linear_accel = checkLinearLimitAcceleration(target_linear_accel - LIN_accel_STEP_SIZE)
+#         status = status + 1
+#         print accels(target_linear_accel,target_angular_accel)
+#     elif key == 'a' :
+#         target_angular_accel = checkAngularLimitAcceleration(target_angular_accel + ANG_accel_STEP_SIZE)
+#         status = status + 1
+#         print accels(target_linear_accel,target_angular_accel)
+#     elif key == 'd' :
+#         target_angular_accel = checkAngularLimitAcceleration(target_angular_accel - ANG_accel_STEP_SIZE)
+#         status = status + 1
+#         print accels(target_linear_accel,target_angular_accel)
+#     elif key == ' ' or key == 's' :
+#         target_linear_accel   = 0.0
+#         control_linear_accel  = 0.0
+#         target_angular_accel  = 0.0
+#         control_angular_accel = 0.0
+#         print accels(target_linear_accel, target_angular_accel)
+#     else:
+#         if (key == '\x03'):
+#             break
+
+if __name__=="__main__":
+    if os.name != 'nt':                                     # If system is not Windows, settings are set to Linux for teleopt
+        settings = termios.tcgetattr(sys.stdin)
+
+    rospy.init_node('avc_teleop')
+    pub = rospy.Publisher('cmd_accel', Twist, queue_size=10)
+
+    status = 0
+    target_linear_accel   = 0.0
+    target_angular_accel  = 0.0
+    control_linear_accel  = 0.0
+    control_angular_accel = 0.0
+
+    try:
+        print msg
+        start = time.time()     # logs time when function starts
+        pauseInterval = 1       # time till input key is not valid
+        while(1):
+            key = getKey()      # gets key press
+            now = time.time()   # logs time after getting key press
+            if key == 'w' :     # w is forward
+                target_linear_accel = checkLinearLimitAcceleration(target_linear_accel + LIN_accel_STEP_SIZE) # sets target linear acceleration
+                if(now-start > pauseInterval):
+                    status = status + 1
+                    print accels(target_linear_accel,target_angular_accel)
+                    start = time.time()
+            elif key == 's' :
+                target_linear_accel = checkLinearLimitAcceleration(target_linear_accel - LIN_accel_STEP_SIZE)
+                if(now-start > pauseInterval):
+                    status = status + 1
+                    print accels(target_linear_accel,target_angular_accel)
+                    start = time.time()
+            elif key == 'a' :
+                target_angular_accel = checkAngularLimitAcceleration(target_angular_accel + ANG_accel_STEP_SIZE)
+                if(now-start > pauseInterval):
+                    status = status + 1
+                    print accels(target_linear_accel,target_angular_accel)
+                    start = time.time()
+            elif key == 'd' :
+                target_angular_accel = checkAngularLimitAcceleration(target_angular_accel - ANG_accel_STEP_SIZE)
+                if(now-start > pauseInterval):
+                    status = status + 1
+                    print accels(target_linear_accel,target_angular_accel)
+                    start = time.time()
+            elif key == ' ' or key=='':
+                target_linear_accel   = 0.0
+                control_linear_accel  = 0.0
+                target_angular_accel  = 0.0
+                control_angular_accel = 0.0
+                if(now-start > pauseInterval):
+                    print accels(target_linear_accel,target_angular_accel)
+                    start = time.time()
+            else:
+                if (key == '\x03'):
+                    break
+
+
+            if status == 10 :
+                print msg
+                status = 0
+
+            twist = Twist()
+
+            control_linear_accel = makeSimpleProfile(control_linear_accel, target_linear_accel, (LIN_accel_STEP_SIZE/2.0))
+            twist.linear.x = control_linear_accel; twist.linear.y = 0.0; twist.linear.z = 0.0
+
+            control_angular_accel = makeSimpleProfile(control_angular_accel, target_angular_accel, (ANG_accel_STEP_SIZE/2.0))
+            twist.angular.x = 0.0; twist.angular.y = 0.0; twist.angular.z = control_angular_accel
+
+            pub.publish(twist)
+
+            
+
+    except:
+        print e
+
+    finally:
+        twist = Twist()
+        twist.linear.x = 0.0; twist.linear.y = 0.0; twist.linear.z = 0.0
+        twist.angular.x = 0.0; twist.angular.y = 0.0; twist.angular.z = 0.0
+        pub.publish(twist)
+
+    if os.name != 'nt':
+        termios.tcsetattr(sys.stdin, termios.TCSADRAIN, settings)
