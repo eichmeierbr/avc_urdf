@@ -25,6 +25,10 @@ $ roslaunch avc_motion list_goal.launch
 The robot is controlled by controlling the translational acceleration as well as steering angle acceleration. This is done through keyboard input. Positive and negative linear acceleration is controlled using 'w' and 's' respectively. Positive and negative angular rotation around the z-axis is controlled with 'a' and 'd' respectively. Pressing an input button sends an acceleration value according to avc_teleop_key lines 38-39. When no input is being recieved zero acceleration is being commanded.
 
 ### Project 3: Go to Goal Control
+By using the go-to-goal controller, the robot is given a goal by the user through the 2D Nav goal button on RVIZ. The velocity control that was developed for use in this control was described by x_dot = (A - Bk)x. This velocity controller was implemented in bicycle.cpp. The k controller matrix is found on lines 25-30. The k matrix was calculated by using the matlab lqr function. Then k was used to evalute u_v and u_phi_dot on lines 94-101. These control inputs were then limited through velLimit, and phiLimit on lines 113-123. As the robot gets closer to the goal point, the desired velocity decreases, becoming zero when the robot reaches the point. A new goal can be sent at any time through the go-to-goal controller.
+
+#### List Control
+When the list_goal.launch file is used, the robot, will update the desired position through a hard-coded list found in list_goal_generator.cpp. The velocity controller used for this goal system is the same.
 
 ## Model Used
 
