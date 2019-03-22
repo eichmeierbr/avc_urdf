@@ -1,29 +1,30 @@
-# USU AVC MOTION PROJECT 2
+# USU AVC MOTION
 
 ## How to execute code:
 
 ### Run launch file 
 
 #### Project 2
-Run
+Drive the vehicle using a keyboard controller
 ```
 $ roslaunch avc_motion proj2_avc.launch
 ```
 #### Project 3
-Run
+Drive the vehicle using "2D Nav Goal" button in RVIZ
 ```
 $ roslaunch avc_motion proj3.launch
 ```
-for the main part of the project.
-To run the extra credit goals model, run
+Vehicle drives autonomously in an hourglass shape following preset goal points
 ```
 $ roslaunch avc_motion list_goal.launch
 ```
 
 ## Robot Control
 
+### Project 2: Keyboard Control
 The robot is controlled by controlling the translational acceleration as well as steering angle acceleration. This is done through keyboard input. Positive and negative linear acceleration is controlled using 'w' and 's' respectively. Positive and negative angular rotation around the z-axis is controlled with 'a' and 'd' respectively. Pressing an input button sends an acceleration value according to avc_teleop_key lines 38-39. When no input is being recieved zero acceleration is being commanded.
 
+### Project 3: Go to Goal Control
 
 ## Model Used
 
@@ -31,7 +32,7 @@ We used the continuous-steering car control model to simulate our bot. We chose 
 
 <a href="https://www.codecogs.com/eqnedit.php?latex=\\&space;Inputs:u_a,u_\alpha\\&space;\dot{x}&space;=&space;v&space;*&space;cos($$\theta$$)\\&space;\dot{y}&space;=&space;v&space;*&space;sin($$\theta$$)\\&space;\dot{\theta}&space;=&space;v/L&space;*&space;tan($$\phi$$)\\&space;\dot{v}&space;=&space;u_a&space;\\&space;\dot{\phi}&space;=&space;$$\omega$$\\&space;\dot{\omega}=&space;u_\alpha" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\\&space;Inputs:u_a,u_\alpha\\&space;\dot{x}&space;=&space;v&space;*&space;cos($$\theta$$)\\&space;\dot{y}&space;=&space;v&space;*&space;sin($$\theta$$)\\&space;\dot{\theta}&space;=&space;v/L&space;*&space;tan($$\phi$$)\\&space;\dot{v}&space;=&space;u_a&space;\\&space;\dot{\phi}&space;=&space;$$\omega$$\\&space;\dot{\omega}=&space;u_\alpha" title="\\ Inputs:u_a,u_\alpha\\ \dot{x} = v * cos($$\theta$$)\\ \dot{y} = v * sin($$\theta$$)\\ \dot{\theta} = v/L * tan($$\phi$$)\\ \dot{v} = u_a \\ \dot{\phi} = $$\omega$$\\ \dot{\omega}= u_\alpha" /></a>
 
-We implemented the code by taking the unicycle model that was provided us and turning it into a simple bicycle model by changing how angular velocity is being computed (bicycle.cpp line 107). Then we made it into a smooth bicycle by adding translational acceleration and angular acceleration as states (bicycle.h lines 64-65) and updating the model states using the commanded acceleration (bicycle.cpp lines 88-103).
+We implemented the code by taking the unicycle model that was provided us and turning it into a simple bicycle model by changing how angular velocity is being computed (Project 2: bicycle2.cpp line 107, Project 3: line 127). Then we made it into a smooth bicycle by adding translational acceleration and angular acceleration as states (Poject 2: bicycle2.h lines 64-65, Project 3: bicycle.h lines 69-70) and updating the model states using the commanded acceleration (Project 2: bicycle2.cpp lines 88-103, Project 3: bicycle.cpp lines 104-123).
 
 Then we had to import the URDF from our other miniproject (avc_description.launch.xml and avc_rvizSim.launch line 14). We also made it so that the wheels spin according to the change in odometry.
 
