@@ -9,24 +9,9 @@ $ roslaunch avc_motion proj2_avc.launch
 ```
 
 ## Robot Control
-
-<<<<<<< HEAD
-We used the continuous-steering car control model to simulate our bot. We chose this model because the two front wheels of our bot twist as modeled by the model presented in LaVelle-Planning Algorithms Section (13.2.4.2). The kinematic equations for this model include:
-{% raw %}
-x_dot = v * cos($$\theta$$)
-y_dot = v * sin($$\theta$$)
-theta_dot = v/L * tan($$\phi$$)
-phi_dot = $$\omega$$
-omega_dot = u_alpha
-
-{% endraw %}
-
-We implemented the code by taking the unicycle model that was provided us and turning it into a simple bicycle model by changing how angular velocity is being computed. Then we made it into a smooth bicycle by adding translational velocity and angular velocity as states and updating the model states using the commanded acceleration.
-=======
 The robot is controlled by controlling the translational acceleration as well as steering angle acceleration. This is done through keyboard input. Positive and negative linear acceleration is controlled using 'w' and 's' respectively. Positive and negative angular rotation around the z-axis is controlled with 'a' and 'd' respectively. Pressing an input button sends an acceleration value according to avc_teleop_key lines 38-39. When no input is being recieved zero acceleration is being commanded.
 
 ## Model Used
->>>>>>> 53c84a080b443d2cdea1f41e9ab3c38b05c52445
 
 We used the continuous-steering car control model to simulate our bot. We chose this model because the two front wheels of our bot twist as modeled by the model presented in LaVelle-Planning Algorithms Section (13.2.4.2). The kinematic equations for this model include:
 
