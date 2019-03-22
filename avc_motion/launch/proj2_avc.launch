@@ -34,7 +34,7 @@
 
   <!-- Create Vehicle -->
   <group>
-    <include file="$(find avc_motion)/launch/avc_rvizSim.launch">
+    <include file="$(find avc_motion)/launch/avc_rvizSim2.launch">
       <arg name="model" value="$(arg model)" />
       <arg name="namespace" value="$(arg namespace)" />
       <arg name="spawn_gazebo" value="$(arg spawn_gazebo)" />
