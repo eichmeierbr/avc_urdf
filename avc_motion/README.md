@@ -1,16 +1,29 @@
-# USU AVC MOTION
+# USU AVC MOTION PROJECT 2
 
 ## How to execute code:
 
 ### Run launch file 
 
+#### Project 2
+Run
 ```
 $ roslaunch avc_motion proj2_avc.launch
+```
+#### Project 3
+Run
+```
+$ roslaunch avc_motion proj3.launch
+```
+for the main part of the project.
+To run the extra credit goals model, run
+```
+$ roslaunch avc_motion list_goal.launch
 ```
 
 ## Robot Control
 
 The robot is controlled by controlling the translational acceleration as well as steering angle acceleration. This is done through keyboard input. Positive and negative linear acceleration is controlled using 'w' and 's' respectively. Positive and negative angular rotation around the z-axis is controlled with 'a' and 'd' respectively. Pressing an input button sends an acceleration value according to avc_teleop_key lines 38-39. When no input is being recieved zero acceleration is being commanded.
+
 
 ## Model Used
 
@@ -45,3 +58,5 @@ and then again in geometries.xacro on lines 7, and 27 remove one of the / on the
 7  <mesh filename="file://$(find avc_urdf)/meshes/chassis2.DAE" scale="${chassisScale} ${chassisScale} ${chassisScale}"/>
 14 <mesh filename="file://$(find avc_urdf)/meshes/chassis2.DAE" scale="${chassisScale} ${chassisScale} ${chassisScale}"/>
 ```
+
+# AVC VELOCITY CONTROL PROJECT 3
