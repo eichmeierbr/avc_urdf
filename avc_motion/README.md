@@ -63,5 +63,3 @@ and then again in geometries.xacro on lines 7, and 27 remove one of the / on the
 7  <mesh filename="file://$(find avc_urdf)/meshes/chassis2.DAE" scale="${chassisScale} ${chassisScale} ${chassisScale}"/>
 14 <mesh filename="file://$(find avc_urdf)/meshes/chassis2.DAE" scale="${chassisScale} ${chassisScale} ${chassisScale}"/>
 ```
-
-# AVC VELOCITY CONTROL PROJECT 3
