@@ -96,7 +96,7 @@ bool Bicycle::updateOdometry(ros::Duration diff_time){
                 + k13_*(phi_dot_));
 
     // Calculate the phi acceleration input
-    double u_phi_dot = -(k21_*(linear_velocity_-linear_velocity_desired_) 
+    double u_phi_dot = -(k21_*(omega_-angular_velocity_desired_) 
                 + k22_*(phi_- phi_desired_)
                 + k23_*(phi_dot_));
 

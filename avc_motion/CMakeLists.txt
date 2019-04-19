@@ -58,6 +58,7 @@ add_executable(bicycle_dynamics2 src/bicycle2.cpp)
 add_executable(simple_map_tf src/simple_map_tf.cpp)
 add_executable(list_goal_generator src/list_goal_generator.cpp)
 add_executable(simple_go_to_goal src/simple_go_to_goal.cpp)
+add_executable(go_to_gps src/go_to_gps.cpp)
 
 add_dependencies(avc_vehicle ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 add_dependencies(bicycle_dynamics ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
@@ -65,6 +66,7 @@ add_dependencies(bicycle_dynamics2 ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_
 add_dependencies(simple_map_tf ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 add_dependencies(list_goal_generator ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 add_dependencies(simple_go_to_goal ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_dependencies(go_to_gps ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 target_link_libraries(avc_vehicle ${catkin_LIBRARIES})
 target_link_libraries(bicycle_dynamics ${catkin_LIBRARIES})
@@ -72,6 +74,7 @@ target_link_libraries(bicycle_dynamics2 ${catkin_LIBRARIES})
 target_link_libraries(simple_map_tf ${catkin_LIBRARIES})
 target_link_libraries(list_goal_generator ${catkin_LIBRARIES})
 target_link_libraries(simple_go_to_goal ${catkin_LIBRARIES})
+target_link_libraries(go_to_gps ${catkin_LIBRARIES})
 
 ################################################################################
 # Install
