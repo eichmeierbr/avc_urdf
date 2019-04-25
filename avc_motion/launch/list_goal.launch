@@ -1,5 +1,6 @@
 <launch>
   <!-- <arg name="namespace" default="/robot1"/> -->
+  <arg name="motors" default="false"/>
   <arg name="namespace" default=""/>
   <arg name="run_sim" default="true"/>
   <arg name="run_rviz" default="true"/>
@@ -41,6 +42,12 @@
       <arg name="z_pos" value="$(arg z_pos)"/>
       <arg name="yaw" value="$(arg yaw)"/>
     </include>
+
+    <group if="$(arg motors)">
+      <include file="$(find nav_stack)/launch/joy.launch">
+        <arg name="master" value="false"/>
+      </include>
+    </group>
 
     <!-- Run the goal to goal control -->
     <node pkg="avc_motion" type="simple_go_to_goal" name="go_to_goal"  output="screen" unless="$(arg run_joystick)">
