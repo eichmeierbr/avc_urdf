@@ -20,8 +20,8 @@ RandGoalGenerator::RandGoalGenerator(): x_max(5.0), y_max(5.0), z_max(0.0), dist
     goal_index_ = 0;
     float multiplier = 1;
 
-    list_goals_x_ = {1, 1, -1, -1};
-    list_goals_y_ = {1, -1, 1, -1};
+    list_goals_x_ = {3,  3, -3, -3};
+    list_goals_y_ = {3, -3,  3, -3};
 
     // Initialize the goal
     goal.header.frame_id = "map";

@@ -64,7 +64,7 @@
       <param name="x_max" value="5" />
       <param name="y_max" value="5" />
       <param name="z_max" value="0.0" />
-      <param name="dist_to_change" value="0.5" />
+      <param name="dist_to_change" value="1" />
 
       <remap from="goal" to="$(arg goal_topic)" />
       <remap from="odom" to="$(arg namespace)/odom" />
