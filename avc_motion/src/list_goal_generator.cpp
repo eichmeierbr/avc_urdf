@@ -18,9 +18,10 @@ RandGoalGenerator::RandGoalGenerator(): x_max(5.0), y_max(5.0), z_max(0.0), dist
     dist_to_change = std::abs(dist_to_change);
 
     goal_index_ = 0;
+    float multiplier = 1;
 
-    list_goals_x_ = {4, 4, -4, -4};
-    list_goals_y_ = {4, -4, 4, -4};
+    list_goals_x_ = {1, 1, -1, -1};
+    list_goals_y_ = {1, -1, 1, -1};
 
     // Initialize the goal
     goal.header.frame_id = "map";
