@@ -58,9 +58,16 @@
       <param name="y_max" value="5" />
       <param name="z_max" value="0.0" />
       <param name="dist_to_change" value="0.5" />
-
       <remap from="goal" to="$(arg goal_topic)" />
     </node>
+
+    <include file="$(find sound_play)soundplay_node.launch" />
+
+
+    <node pkg="avc_motion" type="sendSound.py" name="play_sound_file">
+      <remap from="goal" to="$(arg goal_topic)" />
+    </node>
+
   </group>
 
 

@@ -52,7 +52,7 @@ def updateGPS():
         try:
             # Collect GPS data from the server
             [lat1, lon1] = [41.7502065,-111.8151294]
-            [lat2, lon2] = [41.7517753,-111.8146574]
+            [lat2, lon2] = [40.7517753,-111.8146574]
             # [lat1, lon1] = getGPSpoints('medicalFake1','GPS_goal')
             # [lat2, lon2] = getGPSpoints('fakeLocation2','GPS_car')
         except:

@@ -8,15 +8,15 @@ SimpleGoToGoal::SimpleGoToGoal(): goal_received(false), v_nom(1.0), k_w(1.0), k_
     // Read in constants
     ros::NodeHandle nh("~");
     nh.getParam("nominal_velocity", v_nom);
-    nh.getParam("trans_vel_gain", k_v);
-    nh.getParam("rot_vel_gain", k_w);
-
-
-    // Initialize the velocity command
-    cmd.linear.y = 0.0;
-    cmd.linear.z = 0.0;
-    cmd.linear.x = 0.0;
-
+    nh.getParam("trans_vel_gain", k_v);;
+    nh.getParam("rot_vel_gain", k_w);;
+;
+;
+    // Initialize the velocity command;
+    cmd.linear.y = 0.0;;
+    cmd.linear.z = 0.0;;
+    cmd.linear.x = 0.0;;
+;
     cmd.angular.x = 0.0;
     cmd.angular.y = 0.0;
     cmd.angular.z = 0.0;
